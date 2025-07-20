@@ -211,3 +211,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+#datas
+src/data/bac_fr/pdf/
+src/data/bac_fr/datas/
