@@ -1,10 +1,12 @@
 model:
   model_name: "Qwen/Qwen3-0.6B"
   dtype: "bfloat16"
-  gpu_memory_utilization: 0.8 
+  gpu_memory_utilization: 0.9
+  max_model_length: 32768
 
 model_parameters:
   temperature: 0.0
+  max_new_tokens: 16384
 
 extras:
   enable_thinking: true
@@ -17,11 +19,20 @@ extras:
   push_to_hub: false
 
 tasks:
-  - "community|ifeval-fr|0|1"
-  - "community|gpqa-diamond-fr|0|1"
-  - "community|bbh-fr|0|1"
-  - "community|hellaswag-fr|0|1"
-  - "community|boolq-fr|0|1"
-  - "community|mmlu_fr|0|1"
-  - "community|musr-fr|0|1"
-  - "community|math-hard-fr|0|1" # 4 shots under the hood
+# French tasks
+  - "community|ifeval-fr|0|0"
+  - "community|gpqa-diamond-fr|0|0"
+  - "community|hellaswag-fr|0|0"
+  - "community|boolq-fr|0|0"
+  - "community|mmlu_fr|0|0"
+  - "community|musr-fr|0|0"
+  - "community|math-hard-fr|0|0" # 4 shots under the hood
+
+# English tasks
+  - "extended|ifeval|0|0"
+  - "leaderboard|hellaswag|0|0"
+  - "leaderboard|mmlu|0|0"
+  - "helm|boolq|0|0"
+  - "leaderboard|arc:challenge|0|0"
+  # - "lighteval|gpqa:diamond|0|0" # Need to fix the metrics
+  # - "lighteval|math|0|0" # Need to fix the metrics

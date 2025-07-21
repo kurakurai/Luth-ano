@@ -16,7 +16,7 @@ That's it, you can now run any command you want!
 
 ## 2. Evaluation
 
-Custom French evals supported: `IFEval-fr`, `GPQA-Diamond-fr`, `BBH-fr`, `Math-HARD-fr`, `BoolQ-fr`, `MMLU-fr`, `MuSR-fr`, `Hellaswag-fr`
+Custom French evals supported: `IFEval-fr`, `GPQA-Diamond-fr`, `BBH-fr`, `Math-fr`, `BoolQ-fr`, `MMLU-fr`, `MuSR-fr`, `Hellaswag-fr`
 
 You can modify the evaluation configuration in the `eval_config.yaml` file. Also don't forget to set your `HF_TOKEN`.
 ```bash
@@ -64,15 +64,25 @@ mergekit-yaml configs/mergekit/merge_linear.yaml ./merged-output --cuda
 
 ### 5.1 Non-Thinking mode
 
-| Benchmark                 | Qwen3-0.6B | Qwen2.5-0.5B-Instruct | SmolLM2-360M-Instruct |  LFM2-700M   |  LFM2-350M   |
+| Benchmarks                | Qwen3-0.6B | Qwen2.5-0.5B-Instruct | SmolLM2-360M-Instruct |  LFM2-700M   |  LFM2-350M   |
 |---------------------------|------------|-----------------------|-----------------------|--------------|--------------|
 | IFEval-fr (prompt strict) |  **43.44** | 20.70                 | 20.89                 |              |              |
 | GPQA-Diamond-fr           |  **29.95** | 22.84                 | 28.43                 |              |              |
-| BBH-fr                    |    24.60   | 24.35                 |  **40.41**            |              |              |
-| Math-HARD-fr              |  **10.86** | 3.04                  |   1.17                |              |              |
+| Math-fr                   |  **10.86** | 3.04                  |   1.17                |              |              |
 | BoolQ-fr                  |  **74.72** | 59.55                 |   26.97               |              |              |
 | MMLU-fr                   |  27.16     | **35.04**             |   26.14               |              |              |
 | MuSR-fr                   |  33.34     |   34.17               |   **36.41**           |              |              |
 | Hellaswag-fr              |  24.90     | **51.21**             |   32.78               |              |              |
+|---------------------------|------------|-----------------------|-----------------------|--------------|--------------|
+| IFEval-en (prompt strict) |  57.67     |                       |                       |              |              |
+| BoolQ-en                  |  70.06     |                       |                       |              |              |
+| MMLU-en                   |  36.79     |                       |                       |              |              |
+| ARC-Challenge             |  33.70     |                       |                       |              |              |
+| Hellaswag-en              |  42.91     |                       |                       |              |              |
+| GPQA-Diamond-en           |  -         |                       |                       |              |              |
+| Math-en                   |  -         |                       |                       |              |              |
+ 
 
-We used `temperature=0.0` and `system_prompt="Vous êtes un assistant utile."`.
+We used:
+- French bench: `temperature=0.0` and `system_prompt="Vous êtes un assistant utile."`.
+- English bench: `temperature=0.0` and `system_prompt="You are a helpful assistant."`.

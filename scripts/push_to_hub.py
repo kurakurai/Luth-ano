@@ -1,6 +1,6 @@
 from huggingface_hub import create_repo, upload_folder
 
-repo_id = "kurakurai/Luth-Qwen3-0.6B-merged"
+repo_id = "kurakurai/Luth-Qwen3-0.6B-OH-merged-0.2"
 folder_path = "merged-output"
 
 # Create the repo (does nothing if it already exists and `exist_ok=True`)
