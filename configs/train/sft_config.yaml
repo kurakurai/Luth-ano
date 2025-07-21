@@ -17,8 +17,9 @@ gradient_checkpointing: true # tradeoff reduced VRAM for increased time
 optimizer: "adamw_torch_8bit"
 lr_scheduler: "cosine"
 warmup_ratio: 0.2
-float16: false
 bf16: true
+fp16: false
+tf32: false
 max_grad_norm: 0.1
 num_epochs: 3
 saves_per_epoch: 1
