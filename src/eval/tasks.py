@@ -10,6 +10,7 @@ from lighteval.metrics.normalizations import (
     LogProbPMINorm,
     LogProbTokenNorm,
 )
+import lighteval.tasks.default_prompts as default_prompts
 from lighteval.utils.language import Language
 from lighteval.tasks.templates.utils.formulation import MCFFormulation
 import prompts as custom_prompt
@@ -26,9 +27,62 @@ metrics = [
     metrics_module.prefix_quasi_exact_match,
 ]
 
+# Arc-Challenge-fr task
+arc_challenge_fr_task = LightevalTaskConfig(
+    name="arc_challenge_fr",
+    suite=["community"],
+    prompt_function=custom_prompt.prompt_arc_fr,
+    hf_repo="manu/french_bench_arc_challenge",
+    hf_subset="default",
+    hf_avail_splits=["train", "test"],
+    evaluation_splits=["test"],
+    few_shots_split="train",
+    few_shots_select="random",
+    generation_size=1 if not enable_thinking else 4096,
+    metric=[Metrics.loglikelihood_acc, Metrics.loglikelihood_acc_norm_nospace],
+    stop_sequence=[],
+    trust_dataset=True,
+    version=0,
+)
+
+# AIME24-fr task
+aime24_fr_task = LightevalTaskConfig(
+    name="aime24_fr",
+    suite=["community"],
+    prompt_function=custom_prompt.prompt_aime_fr,
+    hf_repo="kurakurai/aime_2024_fr",
+    hf_subset="default",
+    hf_avail_splits=["train"],
+    evaluation_splits=["train"],
+    few_shots_split="train",
+    few_shots_select="random",
+    generation_size=8192,
+    metric=[
+        custom_metric.math_fr_pass_at_1_1n,
+    ],
+    version=2,
+)
+
+# Math-500-fr task
+math_500_fr_task = LightevalTaskConfig(
+    name="math_500_fr",
+    prompt_function=custom_prompt.prompt_math_500_fr,
+    suite=["community"],
+    hf_repo="bezir/MATH-500-multilingual",
+    hf_subset="French",
+    metric=[custom_metric.math_fr_pass_at_1_1n],
+    hf_avail_splits=["test"],
+    evaluation_splits=["test"],
+    few_shots_split="train",
+    few_shots_select="random",
+    generation_size=8192,
+    stop_sequence=[],  # no stop sequence, will use eot token
+    version="0.1",
+)
+
 # IFEVal-fr task
 ifeval_fr_task = LightevalTaskConfig(
-    name="ifeval-fr",
+    name="ifeval_fr",
     prompt_function=custom_prompt.prompt_ifeval_fr,
     suite=["community"],
     hf_repo="jzhang86/fr_ifeval",
@@ -38,14 +92,14 @@ ifeval_fr_task = LightevalTaskConfig(
     evaluation_splits=["train"],
     few_shots_split="train",
     few_shots_select="random",
-    generation_size=4096,
+    generation_size=8192,
     stop_sequence=[],  # no stop sequence, will use eot token
     version="0.1",
 )
 
 # GPQA-Diamond-fr task
 gpqa_diamond_fr_task = LightevalTaskConfig(
-    name="gpqa-diamond-fr",
+    name="gpqa_fr:diamond",
     suite=["community"],
     prompt_function=custom_prompt.gpqa_diamond_fr_instruct,
     hf_repo="le-leadboard/gpqa-fr",
@@ -54,7 +108,7 @@ gpqa_diamond_fr_task = LightevalTaskConfig(
     evaluation_splits=["train"],
     few_shots_split="train",
     few_shots_select="random",
-    generation_size=4096,
+    generation_size=8192,
     metric=[
         custom_metric.gpqa_instruct_pass_fr_at_1_1n,
     ],
@@ -65,7 +119,7 @@ gpqa_diamond_fr_task = LightevalTaskConfig(
 
 # Hellaswag-fr task
 hellaswag_fr_task = LightevalTaskConfig(
-    name="hellaswag-fr",
+    name="hellaswag_fr",
     suite=["community"],
     prompt_function=custom_prompt.prompt_hellaswag_fr,
     hf_repo="manu/french_bench_hellaswag",
@@ -82,20 +136,20 @@ hellaswag_fr_task = LightevalTaskConfig(
 )
 
 
-# Math-Hard-fr task
-math_hard_fr_task = LightevalTaskConfig(
-    name="math-hard-fr",
+# Math-Fr task
+math_lvl5_fr_task = LightevalTaskConfig(
+    name="math_lvl5_fr",
     suite=["community"],
-    prompt_function=custom_prompt.prompt_math_hard_fr,
+    prompt_function=custom_prompt.prompt_math_fr,
     hf_repo="le-leadboard/MATH_LVL5_fr",
     hf_subset="default",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
     few_shots_split="train",
     few_shots_select="random",
-    generation_size=4096,
+    generation_size=8192,
     metric=[
-        custom_metric.math_pass_fr_at_1_1n,
+        custom_metric.math_fr_pass_at_1_1n,
     ],
     trust_dataset=True,
     version=0,
@@ -103,7 +157,7 @@ math_hard_fr_task = LightevalTaskConfig(
 
 # BoolQ-fr task
 boolq_fr_task = LightevalTaskConfig(
-    name="boolq-fr",
+    name="boolq_fr",
     suite=["community"],
     prompt_function=custom_prompt.prompt_boolq_fr,
     hf_repo="manu/french_boolq",
@@ -121,7 +175,7 @@ boolq_fr_task = LightevalTaskConfig(
 
 # MuSR tasks
 musr_fr_murder_mysteries = LightevalTaskConfig(
-    name="musr-fr:murder_mysteries",
+    name="musr_fr:murder_mysteries",
     suite=["community"],
     prompt_function=custom_prompt.musr_fr,
     hf_repo="le-leadboard/musr-fr",
@@ -137,7 +191,7 @@ musr_fr_murder_mysteries = LightevalTaskConfig(
     version=0,
 )
 musr_fr_object_placements = LightevalTaskConfig(
-    name="musr-fr:object_placements",
+    name="musr_fr:object_placements",
     suite=["community"],
     prompt_function=custom_prompt.musr_fr,
     hf_repo="le-leadboard/musr-fr",
@@ -153,7 +207,7 @@ musr_fr_object_placements = LightevalTaskConfig(
     version=0,
 )
 musr_fr_team_allocation = LightevalTaskConfig(
-    name="musr-fr:team_allocation",
+    name="musr_fr:team_allocation",
     suite=["community"],
     prompt_function=custom_prompt.musr_fr,
     hf_repo="le-leadboard/musr-fr",
@@ -200,12 +254,12 @@ mmlu_fr_task = LightevalTaskConfig(
 )
 
 
-# BBH-fr task
+# bbh_fr task
 bbh_boolean_expressions_community = LightevalTaskConfig(
-    name="bbh-fr:expressions_booléennes",
+    name="bbh_fr:expressions_booléennes",
     suite=["community"],
     prompt_function=custom_prompt.bbh_boolean_expressions,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="expressions_booléennes",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -218,10 +272,10 @@ bbh_boolean_expressions_community = LightevalTaskConfig(
     version=0,
 )
 bbh_causal_judgment_community = LightevalTaskConfig(
-    name="bbh-fr:jugement_causal",
+    name="bbh_fr:jugement_causal",
     suite=["community"],
     prompt_function=custom_prompt.bbh_causal_judgment,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="jugement_causal",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -234,10 +288,10 @@ bbh_causal_judgment_community = LightevalTaskConfig(
     version=0,
 )
 bbh_date_understanding_community = LightevalTaskConfig(
-    name="bbh-fr:compréhension_de_la_date",
+    name="bbh_fr:compréhension_de_la_date",
     suite=["community"],
     prompt_function=custom_prompt.bbh_date_understanding,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="compréhension_de_la_date",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -250,10 +304,10 @@ bbh_date_understanding_community = LightevalTaskConfig(
     version=0,
 )
 bbh_disambiguation_qa_community = LightevalTaskConfig(
-    name="bbh-fr:désambiguïsation_qa",
+    name="bbh_fr:désambiguïsation_qa",
     suite=["community"],
     prompt_function=custom_prompt.bbh_disambiguation_qa,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="désambiguïsation_qa",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -266,10 +320,10 @@ bbh_disambiguation_qa_community = LightevalTaskConfig(
     version=0,
 )
 bbh_dyck_languages_community = LightevalTaskConfig(
-    name="bbh-fr:dyck_languages",
+    name="bbh_fr:dyck_languages",
     suite=["community"],
     prompt_function=custom_prompt.bbh_dyck_languages,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="dyck_languages",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -282,10 +336,10 @@ bbh_dyck_languages_community = LightevalTaskConfig(
     version=0,
 )
 bbh_formal_fallacies_community = LightevalTaskConfig(
-    name="bbh-fr:sophismes_formels",
+    name="bbh_fr:sophismes_formels",
     suite=["community"],
     prompt_function=custom_prompt.bbh_formal_fallacies,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="sophismes_formels",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -298,10 +352,10 @@ bbh_formal_fallacies_community = LightevalTaskConfig(
     version=0,
 )
 bbh_geometric_shapes_community = LightevalTaskConfig(
-    name="bbh-fr:formes_géométriques",
+    name="bbh_fr:formes_géométriques",
     suite=["community"],
     prompt_function=custom_prompt.bbh_geometric_shapes,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="formes_géométriques",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -314,10 +368,10 @@ bbh_geometric_shapes_community = LightevalTaskConfig(
     version=0,
 )
 bbh_hyperbaton_community = LightevalTaskConfig(
-    name="bbh-fr:hyperbate",
+    name="bbh_fr:hyperbate",
     suite=["community"],
     prompt_function=custom_prompt.bbh_hyperbaton,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="hyperbate",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -330,10 +384,10 @@ bbh_hyperbaton_community = LightevalTaskConfig(
     version=0,
 )
 bbh_logical_deduction_five_objects_community = LightevalTaskConfig(
-    name="bbh-fr:suivi_objets_mélangés_cinq_objets",
+    name="bbh_fr:suivi_objets_mélangés_cinq_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_logical_deduction_five_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="suivi_objets_mélangés_cinq_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -346,10 +400,10 @@ bbh_logical_deduction_five_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_logical_deduction_seven_objects_community = LightevalTaskConfig(
-    name="bbh-fr:déduction_logique_sept_objets",
+    name="bbh_fr:déduction_logique_sept_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_logical_deduction_seven_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="déduction_logique_sept_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -362,10 +416,10 @@ bbh_logical_deduction_seven_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_logical_deduction_three_objects_community = LightevalTaskConfig(
-    name="bbh-fr:déduction_logique_trois_objets",
+    name="bbh_fr:déduction_logique_trois_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_logical_deduction_three_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="déduction_logique_trois_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -378,10 +432,10 @@ bbh_logical_deduction_three_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_movie_recommendation_community = LightevalTaskConfig(
-    name="bbh-fr:recommandation_de_film",
+    name="bbh_fr:recommandation_de_film",
     suite=["community"],
     prompt_function=custom_prompt.bbh_movie_recommendation,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="recommandation_de_film",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -394,10 +448,10 @@ bbh_movie_recommendation_community = LightevalTaskConfig(
     version=0,
 )
 bbh_multistep_arithmetic_two_community = LightevalTaskConfig(
-    name="bbh-fr:multistep_arithmetic_two",
+    name="bbh_fr:multistep_arithmetic_two",
     suite=["community"],
     prompt_function=custom_prompt.bbh_multistep_arithmetic_two,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="multistep_arithmetic_two",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -410,10 +464,10 @@ bbh_multistep_arithmetic_two_community = LightevalTaskConfig(
     version=0,
 )
 bbh_navigate_community = LightevalTaskConfig(
-    name="bbh-fr:naviguer",
+    name="bbh_fr:naviguer",
     suite=["community"],
     prompt_function=custom_prompt.bbh_navigate,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="naviguer",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -426,10 +480,10 @@ bbh_navigate_community = LightevalTaskConfig(
     version=0,
 )
 bbh_object_counting_community = LightevalTaskConfig(
-    name="bbh-fr:comptage_d_objets",
+    name="bbh_fr:comptage_d_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_object_counting,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="comptage_d_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -442,10 +496,10 @@ bbh_object_counting_community = LightevalTaskConfig(
     version=0,
 )
 bbh_penguins_in_a_table_community = LightevalTaskConfig(
-    name="bbh-fr:pingouins_sur_une_table",
+    name="bbh_fr:pingouins_sur_une_table",
     suite=["community"],
     prompt_function=custom_prompt.bbh_penguins_in_a_table,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="pingouins_sur_une_table",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -458,10 +512,10 @@ bbh_penguins_in_a_table_community = LightevalTaskConfig(
     version=0,
 )
 bbh_reasoning_about_colored_objects_community = LightevalTaskConfig(
-    name="bbh-fr:raisonnement_sur_les_objets_colorés",
+    name="bbh_fr:raisonnement_sur_les_objets_colorés",
     suite=["community"],
     prompt_function=custom_prompt.bbh_reasoning_about_colored_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="raisonnement_sur_les_objets_colorés",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -474,10 +528,10 @@ bbh_reasoning_about_colored_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_ruin_names_community = LightevalTaskConfig(
-    name="bbh-fr:noms_de_ruines",
+    name="bbh_fr:noms_de_ruines",
     suite=["community"],
     prompt_function=custom_prompt.bbh_ruin_names,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="noms_de_ruines",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -490,10 +544,10 @@ bbh_ruin_names_community = LightevalTaskConfig(
     version=0,
 )
 bbh_salient_translation_error_detection_community = LightevalTaskConfig(
-    name="bbh-fr:détection_d_erreur_de_traduction_sailante",
+    name="bbh_fr:détection_d_erreur_de_traduction_sailante",
     suite=["community"],
     prompt_function=custom_prompt.bbh_salient_translation_error_detection,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="détection_d_erreur_de_traduction_sailante",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -506,10 +560,10 @@ bbh_salient_translation_error_detection_community = LightevalTaskConfig(
     version=0,
 )
 bbh_snarks_community = LightevalTaskConfig(
-    name="bbh-fr:sarcasmes",
+    name="bbh_fr:sarcasmes",
     suite=["community"],
     prompt_function=custom_prompt.bbh_snarks,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="sarcasmes",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -522,10 +576,10 @@ bbh_snarks_community = LightevalTaskConfig(
     version=0,
 )
 bbh_sports_understanding_community = LightevalTaskConfig(
-    name="bbh-fr:compréhension_des_sports",
+    name="bbh_fr:compréhension_des_sports",
     suite=["community"],
     prompt_function=custom_prompt.bbh_sports_understanding,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="compréhension_des_sports",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -538,10 +592,10 @@ bbh_sports_understanding_community = LightevalTaskConfig(
     version=0,
 )
 bbh_temporal_sequences_community = LightevalTaskConfig(
-    name="bbh-fr:séquences_temporelles",
+    name="bbh_fr:séquences_temporelles",
     suite=["community"],
     prompt_function=custom_prompt.bbh_temporal_sequences,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="séquences_temporelles",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -554,10 +608,10 @@ bbh_temporal_sequences_community = LightevalTaskConfig(
     version=0,
 )
 bbh_tracking_shuffled_objects_five_objects_community = LightevalTaskConfig(
-    name="bbh-fr:suivi_objets_mélangés_cinq_objets",
+    name="bbh_fr:suivi_objets_mélangés_cinq_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_tracking_shuffled_objects_five_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="suivi_objets_mélangés_cinq_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -570,10 +624,10 @@ bbh_tracking_shuffled_objects_five_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_tracking_shuffled_objects_seven_objects_community = LightevalTaskConfig(
-    name="bbh-fr:suivi_objets_mélangés_sept_objets",
+    name="bbh_fr:suivi_objets_mélangés_sept_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_tracking_shuffled_objects_seven_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="suivi_objets_mélangés_sept_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -586,10 +640,10 @@ bbh_tracking_shuffled_objects_seven_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_tracking_shuffled_objects_three_objects_community = LightevalTaskConfig(
-    name="bbh-fr:suivi_objets_mélangés_trois_objets",
+    name="bbh_fr:suivi_objets_mélangés_trois_objets",
     suite=["community"],
     prompt_function=custom_prompt.bbh_tracking_shuffled_objects_three_objects,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="suivi_objets_mélangés_trois_objets",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -602,10 +656,10 @@ bbh_tracking_shuffled_objects_three_objects_community = LightevalTaskConfig(
     version=0,
 )
 bbh_web_of_lies_community = LightevalTaskConfig(
-    name="bbh-fr:toile_de_mensonges",
+    name="bbh_fr:toile_de_mensonges",
     suite=["community"],
     prompt_function=custom_prompt.bbh_web_of_lies,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="toile_de_mensonges",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -618,10 +672,10 @@ bbh_web_of_lies_community = LightevalTaskConfig(
     version=0,
 )
 bbh_word_sorting_community = LightevalTaskConfig(
-    name="bbh-fr:tri_de_mots",
+    name="bbh_fr:tri_de_mots",
     suite=["community"],
     prompt_function=custom_prompt.bbh_word_sorting,
-    hf_repo="le-leadboard/bbh-fr",
+    hf_repo="le-leadboard/bbh_fr",
     hf_subset="tri_de_mots",
     hf_avail_splits=["test"],
     evaluation_splits=["test"],
@@ -634,11 +688,68 @@ bbh_word_sorting_community = LightevalTaskConfig(
     version=0,
 )
 
+# Adjusted English Tasks
+math_500_fixed = LightevalTaskConfig(
+    name="math_500",
+    suite=["community"],
+    prompt_function=default_prompts.math_500,
+    hf_repo="HuggingFaceH4/MATH-500",
+    hf_subset="default",
+    hf_avail_splits=["test"],
+    evaluation_splits=["test"],
+    few_shots_split=None,
+    few_shots_select=None,
+    generation_size=8192,
+    metric=[
+        Metrics.math_pass_at_1_1n,
+    ],
+    version=2,
+)
+
+gpqa_diamond_instruct_lighteval_fixed = LightevalTaskConfig(
+    name="gpqa:diamond",
+    suite=["community"],
+    prompt_function=default_prompts.gpqa_instruct,
+    hf_repo="Idavidrein/gpqa",
+    hf_subset="gpqa_diamond",
+    hf_avail_splits=["train"],
+    evaluation_splits=["train"],
+    few_shots_split=None,
+    few_shots_select=None,
+    generation_size=8192,
+    metric=[
+        Metrics.gpqa_instruct_pass_at_1_1n,
+    ],
+    stop_sequence=[],
+    trust_dataset=True,
+    version=1,
+)
+
+aime24_fixed = LightevalTaskConfig(
+    name="aime24",
+    suite=["community"],
+    prompt_function=default_prompts.aime_prompt_fn,
+    hf_repo="HuggingFaceH4/aime_2024",
+    hf_subset="default",
+    hf_avail_splits=["train"],
+    evaluation_splits=["train"],
+    few_shots_split=None,
+    few_shots_select=None,
+    generation_size=8192,
+    metric=[
+        Metrics.math_pass_at_1_1n,
+    ],
+    version=2,
+)
+
 # STORE YOUR EVALS
 TASKS_TABLE = [
+    arc_challenge_fr_task,
+    aime24_fr_task,
+    math_500_fr_task,
+    math_lvl5_fr_task,
     ifeval_fr_task,
     gpqa_diamond_fr_task,
-    math_hard_fr_task,
     boolq_fr_task,
     mmlu_fr_task,
     musr_fr_team_allocation,
@@ -672,4 +783,7 @@ TASKS_TABLE = [
     bbh_web_of_lies_community,
     bbh_word_sorting_community,
     hellaswag_fr_task,
+    math_500_fixed,
+    gpqa_diamond_instruct_lighteval_fixed,
+    aime24_fixed,
 ]
