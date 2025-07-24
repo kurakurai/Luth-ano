@@ -214,5 +214,6 @@ __marimo__/
 
 
 #datas
-src/data/bac-fr/pdf/
-src/data/bac-fr/datas/
+src/data/scholar-fr/pdf/
+src/data/scholar-fr/datas/
+src/data/scholar-fr/scripts/cleaned_json/
