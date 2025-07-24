@@ -12,21 +12,21 @@ cleaned_dir = "/home/gad/kurakura/french-slm/src/data/bac-fr/scripts/cleaned_jso
 cleaned = os.listdir(cleaned_dir)
 files_sorted = sorted(cleaned, key=lambda x: int(x.split('.')[0]))
 
-# Fonction pour corriger les backslashes LaTeX
+
 def fix_latex_backslashes(text):
     """
-    Corrige les backslashes excessifs dans les expressions LaTeX
+    correct backslaches and latex formula
     """
     if not isinstance(text, str):
         return text
     
-    # Remplacer les quadruples backslashes par des doubles
+
     text = re.sub(r'\\\\\\\\', r'\\\\', text)
     
-    # Remplacer les triples backslashes par des simples (pour LaTeX)
+
     text = re.sub(r'\\\\\\', r'\\', text)
     
-    # Patterns spécifiques pour les commandes LaTeX courantes
+
     latex_commands = [
         'text', 'mathbb', 'mathcal', 'mathrm', 'sin', 'cos', 'tan', 'log', 'ln',
         'frac', 'sqrt', 'sum', 'int', 'prod', 'lim', 'alpha', 'beta', 'gamma',
@@ -42,24 +42,23 @@ def fix_latex_backslashes(text):
     
     return text
 
-# Nettoyage des chaînes (version améliorée)
+
 def fix_text(raw):
-    # Supprimer les caractères de contrôle sauf \n et \t
+
     raw = ''.join(c for c in raw if ord(c) >= 32 or c in '\n\t')
     
-    # Ne pas doubler les backslashes qui sont déjà corrects pour LaTeX
-    # Seulement échapper les backslashes isolés qui ne sont pas des commandes LaTeX
+
     raw = re.sub(r'(?<!\\)\\(?![\\nt"bfr/a-zA-Z])', r'\\\\', raw)
     
     return raw
 
-# Formatage lisible pour affichage brut (version améliorée)
+
 def sanity(sample):
     if isinstance(sample, str):
-        # Appliquer la correction des backslashes LaTeX
+
         return fix_latex_backslashes(sample)
     elif isinstance(sample, dict):
-        # Appliquer récursivement aux valeurs du dictionnaire
+
         result = {}
         for k, v in sample.items():
             if isinstance(v, str):
@@ -70,7 +69,7 @@ def sanity(sample):
                 result[k] = v
         return '\n'.join(f"{k} : {v}" for k, v in result.items())
     elif isinstance(sample, list):
-        # Appliquer récursivement aux éléments de la liste
+
         fixed_items = []
         for item in sample:
             if isinstance(item, str):
@@ -82,11 +81,10 @@ def sanity(sample):
         return '\n'.join(fixed_items)
     return ''
 
-# Fonction pour nettoyer récursivement un objet JSON
+
 def clean_json_object(obj):
     """
-    Nettoie récursivement tous les strings dans un objet JSON
-    en corrigeant les backslashes LaTeX
+    clean and correct backslashes
     """
     if isinstance(obj, str):
         return fix_latex_backslashes(obj)
@@ -97,11 +95,11 @@ def clean_json_object(obj):
     else:
         return obj
 
-# Statistiques d'échec
+
 failure_stats = Counter()
 ignored_files = []
 
-# Parse robuste avec raisons d'échec (version améliorée)
+
 def clean_json_file_with_reason(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         raw_text = f.read().strip()
@@ -110,21 +108,21 @@ def clean_json_file_with_reason(file_path):
         failure_stats['vide'] += 1
         return {}, "vide"
 
-    # Tentative brute
+
     try:
         obj = json.loads(raw_text)
         return clean_json_object(obj), None
     except:
         pass
 
-    # Tentative avec correction d'antislashs
+
     try:
         obj = json.loads(fix_text(raw_text))
         return clean_json_object(obj), None
     except:
         pass
 
-    # Cas de présence d'un champ "raw_output"
+
     try:
         obj = json.loads(raw_text)
         if isinstance(obj, dict) and 'raw_output' in obj:
@@ -138,7 +136,7 @@ def clean_json_file_with_reason(file_path):
     except:
         pass
 
-    # Dernier recours : JSON mal écrit avec des guillemets simples
+
     try:
         obj = literal_eval(raw_text)
         if isinstance(obj, dict):
@@ -189,21 +187,19 @@ for i, row in df.iterrows():
     final_df.loc[i, 'subject'] = subject
     final_df.loc[i, 'difficulty'] = 'medium'
 
-# Export des résultats avec options pour préserver les backslashes
-final_df.to_json("../datas/Scholar-fr-V0.json", orient="records", lines=True, force_ascii=False)
 
-# Pour le CSV, utiliser des options qui préservent mieux les backslashes
+final_df.to_json("../datas/Scholar-fr-V0.json", orient="records", lines=True, force_ascii=False)
 final_df.to_csv("../datas/Scholar-fr-V0.csv", index=False, escapechar=None, quoting=1)
 
-# Log des fichiers ignorés avec raison
+
 with open("ignored_files.txt", "w") as f:
     for fname, reason in ignored_files:
         f.write(f"{fname}\t{reason}\n")
 
 # Résumé
-print(f"\n✅ Fichiers traités avec succès : {len(final_df)}")
-print(f"❌ Total fichiers ignorés : {len(ignored_files)}")
-print("\n📊 Statistiques des erreurs :")
+print(f"\n Successfull files : {len(final_df)}")
+print(f" Ignored files : {len(ignored_files)}")
+print("\n Statistics :")
 for reason, count in failure_stats.items():
     print(f" - {reason} : {count}")
 
