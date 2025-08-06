@@ -5,10 +5,11 @@ import re
 from collections import Counter
 from ast import literal_eval
 
-# Charger CSV source
-df = pd.read_csv("/home/gad/kurakura/french-slm/src/data/bac-fr/datas/questions_combinees.csv")
+# Prompt formatting and final sanity check before gathering
 
-cleaned_dir = "/home/gad/kurakura/french-slm/src/data/bac-fr/scripts/cleaned_json"
+df = pd.read_csv("...")
+
+cleaned_dir = "..."
 cleaned = os.listdir(cleaned_dir)
 files_sorted = sorted(cleaned, key=lambda x: int(x.split('.')[0]))
 
@@ -155,6 +156,7 @@ template = lambda question, context, response: [
     {"role": "assistant", "content": response}
 ]
 
+sub_dic = {"sciences-eco-sociales":"ses", "svt":"biology","sciences-premiere":"general-science", "sciences-ingenieur" :"engineering-science", "sciences-vie-terre":"svt"}
 for i, row in df.iterrows():
     if i >= len(files_sorted):
         break
@@ -183,13 +185,15 @@ for i, row in df.iterrows():
     df.loc[i, 'context'] = context
     df.loc[i, 'responses'] = response
 
+    
+    subject = sub_dic[subject]
     final_df.loc[i, 'conversations'] = template(question, context, response)
     final_df.loc[i, 'subject'] = subject
-    final_df.loc[i, 'difficulty'] = 'medium'
+    final_df.loc[i, 'difficulty'] = 'medium' if subject !="ses" and subject !="general-science" else 'easy'
 
 
-final_df.to_json("../datas/Scholar-fr-V0.json", orient="records", lines=True, force_ascii=False)
-final_df.to_csv("../datas/Scholar-fr-V0.csv", index=False, escapechar=None, quoting=1)
+final_df.to_json("...", orient="records", lines=True, force_ascii=False)
+final_df.to_csv("...", index=False, escapechar=None, quoting=1)
 
 
 with open("ignored_files.txt", "w") as f:
