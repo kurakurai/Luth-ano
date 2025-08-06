@@ -1,14 +1,15 @@
 import wget
 import csv
 
-filter = "physique" # flter subjects to download
-
+filter = "svt" # flter subjects to download
+#sciences
+#svt
 # This script downloads PDF files from a CSV file containing URLs.
 def main():
-    sujets_folder = 'pdf/sujets'
-    corriges_folder = 'pdf/corriges'
+    sujets_folder = '...'
+    corriges_folder = '....' # folder with corrections
 
-    with open('pdf_urls.csv', mode ='r')as file:
+    with open('...', mode ='r')as file:
         csvFile = csv.reader(file)
         next(csvFile)
         for lines in csvFile:
