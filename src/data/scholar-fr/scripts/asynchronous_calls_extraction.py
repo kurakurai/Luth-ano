@@ -13,8 +13,8 @@ import uuid
 from prompts import Prompts
 
 #setup
-PROJECT_ID = "" #Put project ID
-LOCATION = "" #Put zone
+PROJECT_ID = "elated-effect-466816-h9" #Put project ID
+LOCATION = "us-central1" #Put zone
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 model = GenerativeModel("gemini-2.5-flash-lite")
 
@@ -125,23 +125,25 @@ def file_already_processed(subject_path, output_dir):
     return os.path.exists(expected_output)
 
 def save_json(data, subject_path, output_dir):
+
+    # Liste des matières connues
+    subject_keywords = [
+        "sciences-ingenieur", "svt", "sciences-premiere",
+        "sciences-vie-terre", "sciences-eco-sociales"
+    ]
+
+    # Détection de la matière depuis le chemin
+    detected_matiere = next((s for s in subject_keywords if s in subject_path.lower()), "unknown")
+    data = {"result":data}
+    data["subject"] = detected_matiere  # Ajout au JSON
+    
     safe_name = get_safe_filename(subject_path)
     output_path = os.path.join(output_dir, f"{safe_name}.json")
-    try:
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-        return output_path
-    except OSError:
-        pass
-    fallback_name = f"processed_{int(time.time() * 1000)}.json"
-    fallback_path = os.path.join(output_dir, fallback_name)
-    try:
-        with open(fallback_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-        return fallback_path
-    except Exception as e:
-        print(f"Failed all save methods: {e}")
-        return None
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    return output_path
+
 
 async def progress_callback(message: str):
     now = datetime.datetime.now().strftime("%H:%M:%S")
@@ -158,24 +160,25 @@ async def main(root_pdf, csv_path, output_dir, max_concurrent=10):
     async def process_row(index, row):
         nonlocal already_processed
         async with sem:
-            subject_path = os.path.join(root_pdf, "all_together", row["Sujet"])
-            correction_path = os.path.join(root_pdf, "all_together", row["Correction"])
+            subject_path = os.path.join(root_pdf, "sujets", row["sujet"])
+            correction_path = os.path.join(root_pdf, "corriges", row["corrige"])
 
             if file_already_processed(subject_path, output_dir):
                 already_processed += 1
-                print(f"[SKIP] Already processed: {row['Sujet']}")
+                print(f"[SKIP] Already processed: {row['sujet']}")
                 return
 
-            print(f"[PROCESSING] {row['Sujet']}")
+            print(f"[PROCESSING] {row['sujet']}")
             try:
                 result = await full_pipeline_async(subject_path, correction_path, loop, progress_callback)
+
                 saved_path = save_json(result, subject_path, output_dir)
                 if saved_path:
                     print(f"[OK] Saved to {saved_path}")
                 else:
-                    print(f"[FAIL] Could not save {row['Sujet']}")
+                    print(f"[FAIL] Could not save {row['sujet']}")
             except Exception as e:
-                print(f"[ERROR] Failed on {row['Sujet']}: {e}")
+                print(f"[ERROR] Failed on {row['sujet']}: {e}")
 
     await asyncio.gather(*(process_row(i, row) for i, row in df.iterrows()))
 
@@ -185,9 +188,9 @@ async def main(root_pdf, csv_path, output_dir, max_concurrent=10):
     print(f"Newly processed: {total_files - already_processed}")
 
 if __name__ == "__main__":
-    csv_input = "../datas/pdf_pairs.csv"
-    output_folder = "../datas/results_json"
-    root_pdf = r"..\pdf"
+    csv_input = "..."
+    output_folder = "..."
+    root_pdf = "..."
     os.makedirs(output_folder, exist_ok=True)
     asyncio.run(main(root_pdf, csv_input, output_folder, max_concurrent=10))
 

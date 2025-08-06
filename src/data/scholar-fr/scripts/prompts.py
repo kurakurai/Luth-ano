@@ -114,7 +114,7 @@ class Prompts(Enum):
 
         Your tasks are:
         - Correct any errors in spelling, grammar, LaTeX, and formatting in all three inputs.
-        - Carefully review the context and correct it if there are any issues. If the context is missing or empty but should be present based on the question and answer, generate a relevant and useful context.
+        - Carefully review the context and correct it if there are any issues. If the context is missing or empty but should be present based on the question and answer, generate a relevant and useful context. But do not provide the answer to the question or a hint.
         - Translate all English text fully into French.
         - Rephrase the answer to add clarity by:
             - Expanding on the reasoning,
