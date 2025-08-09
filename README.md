@@ -1,4 +1,4 @@
-# Luth: Small French Language Model
+# Luth: Efficient French Specialization and Cross-Lingual Transfer for Small Language Models
 
 <div align="center">
   <img src="./media/logo_kurakura.png" width="100%" alt="Kurakura AI Logo" />
