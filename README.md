@@ -17,6 +17,8 @@
 
 **Luth** is a series of French fine-tuned versions of Qwen3 models, trained via supervised fine-tuning (SFT) on the [Luth-SFT](https://huggingface.co/datasets/kurakurai/luth-sft) dataset with Axolotl, followed by model merging with the original Qwen3 instruct models. The goal is to deliver improved **French instruction-following, math, and general knowledge** capabilities while preserving; and in some cases enhancing; English performance thanks to knowledge transfert. This project aims to provide better models for low-resource languages like French, optimized for low-resource hardware setups, and to contribute high-quality French datasets to the Hugging Face ecosystem, where such resources remain scarce. This repository contains the training, evaluation, and data scripts used to build Luth models: [Luth-0.6b-Instruct](https://huggingface.co/kurakurai/Luth-0.6B-Instruct) and [Luth-1.7B-Instruct](https://huggingface.co/kurakurai/Luth-1.7B-Instruct).
 
+![English Benchmarks 1.7B](media/luth-graph.png)
+
 ## 1. Quick Setup
 
 _Using [`uv`](https://github.com/astral-sh/uv) for fast and reliable dependency management._
