@@ -1,14 +1,16 @@
 model:
-  model_name: "kurakurai/Luth-0.6B-checkpoint-2640"
+  model_name: "LiquidAI/LFM2-700M"
   dtype: "bfloat16"
   gpu_memory_utilization: 0.9
   max_model_length: 16384
+  
 
 model_parameters:
   temperature: 0.0
   max_new_tokens: 8192
 
 extras:
+  enable_prefix_caching: false
   enable_thinking: false
   answer_token: "</think>"  
   use_chat_template: true
@@ -16,12 +18,12 @@ extras:
   num_runs: 1
   output_dir: "results/"
   save_details: true
-  push_to_hub: false
+  push_to_hub: false 
 
 tasks:
 # French tasks
   - "community|ifeval_fr|0|0"
-  - "community|gpqa_fr:diamond|0|0"
+  - "community|gpqa_fr|0|0"
   - "community|mmlu_fr|0|0"
   - "community|math_500_fr|0|0"
   - "community|arc_challenge_fr|0|0"
@@ -30,7 +32,7 @@ tasks:
 # English tasks
   # - "extended|ifeval|0|0"
   # - "leaderboard|mmlu|0|0"
-  # - "community|gpqa:diamond|0|0"
+  # - "community|gpqa|0|0"
   # - "community|math_500|0|0"
   # - "leaderboard|hellaswag|0|0"
   # - "leaderboard|arc:challenge|0|0"

@@ -1,6 +1,28 @@
-# Luth: Small French Language Model
+# Luth: Efficient French Specialization for Small Language Models
 
-Building a Small French Language Model.
+<div align="center">
+  <img src="./media/logo_kurakura.png" width="100%" alt="Kurakura AI Logo" />
+</div>
+<br style="line-height: 12px;" />
+<div align="center" style="line-height: 1;">
+  <a href="https://huggingface.co/collections/kurakurai/luth-models-6893b405f4b2d825eba73564" target="_blank" style="margin: 2px;">
+    <img alt="Luth Models" src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Models-ffc107?color=ffc107&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://huggingface.co/collections/kurakurai/luth-datasets-6881f936cad0a68de7a21044" target="_blank" style="margin: 2px;">
+    <img alt="Luth SFT Dataset" src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Dataset-ffc107?color=ffc107&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
+  </a>
+  <a href="https://huggingface.co/blog/MaxLSB/luth" target="_blank" style="margin: 2px;">
+  <img alt="Luth Blog" src="https://img.shields.io/badge/%F0%9F%93%96%20Blog-Luth-007acc?color=007acc&logoColor=white" style="display: inline-block; vertical-align: middle;"/>
+</a>
+
+</div>
+
+
+## Introduction
+
+**Luth** is a series of French fine-tuned versions of Qwen3 models, trained via supervised fine-tuning (SFT) on the [Luth-SFT](https://huggingface.co/datasets/kurakurai/luth-sft) dataset with Axolotl, followed by model merging with the original Qwen3 instruct models. The goal is to deliver improved **French instruction-following, math, and general knowledge** capabilities while preserving; and in some cases enhancing; English performance thanks to knowledge transfert. This project aims to provide better models for low-resource languages like French, optimized for low-resource hardware setups, and to contribute high-quality French datasets to the Hugging Face ecosystem, where such resources remain scarce. This repository contains the training, evaluation, and data scripts used to build Luth models: [Luth-0.6b-Instruct](https://huggingface.co/kurakurai/Luth-0.6B-Instruct) and [Luth-1.7B-Instruct](https://huggingface.co/kurakurai/Luth-1.7B-Instruct).
+
+![English Benchmarks 1.7B](media/luth-graph.png)
 
 ## 1. Quick Setup
 
@@ -62,25 +84,17 @@ mergekit-yaml configs/mergekit/merge_linear.yaml ./merged-output --cuda
 
 ## 5. Results
 
-### 5.1 Instruct mode
+### 5.1 French Benchmarks
 
-| Benchmarks                | Qwen3-0.6B | Qwen2.5-0.5B-Instruct |  LFM2-700M   |  LFM2-350M   |
-|---------------------------|------------|-----------------------|--------------|--------------|
-| IFEval_fr (prompt strict) |  43.62     |                       |              |              |
-| GPQA_Diamond_fr           |  28.93     |                       |              |              |
-| Math_500_fr               |  29.40     |                       |              |              |
-| MMLU_fr                   |  27.16     |                       |              |              |
-| AIME_2024_fr              |  -         |                       |              |              |
-| Hellaswag_fr              |  25.11     |                       |              |              |
-| ARC_Challenge_fr          |  31.31     |                       |              |              |
-| IFEval_en (prompt strict) |  57.49     |                       |              |              |
-| GPQA_Diamond_en           |  29.80     |                       |              |              |
-| Math_500_en               |  45.00     |                       |              |              |
-| MMLU_en                   |  36.85     |                       |              |              |
-| AIME_2024_en              |  3.33      |                       |              |              |
-| Hellaswag_en              |  42.91     |                       |              |              |
-| ARC_Challenge_en          |  33.62     |                       |              |              |
+![French Benchmarks 0.6B](media/fr_eval_0.6b.png)
 
+![French Benchmarks 1.7B](media/fr_eval_1.7b.png)
+
+### 5.2 English Benchmarks
+
+![English Benchmarks 0.6B](media/en_eval_0.6b.png)
+
+![English Benchmarks 1.7B](media/en_eval_1.7b.png)
 
 We used:
 - French bench: `temperature=0.0` and `system_prompt="Vous êtes un assistant utile."`.
