@@ -1,7 +1,7 @@
 model:
-  model_name: "LiquidAI/LFM2-700M"
+  model_name: "kurakurai/Luth-LFM2-350M"
   dtype: "bfloat16"
-  gpu_memory_utilization: 0.9
+  gpu_memory_utilization: 0.6
   max_model_length: 16384
   
 
@@ -22,12 +22,13 @@ extras:
 
 tasks:
 # French tasks
-  - "community|ifeval_fr|0|0"
-  - "community|gpqa_fr|0|0"
-  - "community|mmlu_fr|0|0"
-  - "community|math_500_fr|0|0"
-  - "community|arc_challenge_fr|0|0"
-  - "community|hellaswag_fr|0|0"
+  # - "community|ifeval_fr|0|0"
+  # - "community|gpqa_fr|0|0"
+  # - "community|mmlu_fr|0|0"
+  # - "community|math_500_fr|0|0"
+  # - "community|arc_challenge_fr|0|0"
+  # - "community|hellaswag_fr|0|0"
+  - "community|scholar_100_fr|0|0"
 
 # English tasks
   # - "extended|ifeval|0|0"

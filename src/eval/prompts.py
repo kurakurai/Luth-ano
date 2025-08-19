@@ -301,6 +301,7 @@ Résous le problème de mathématiques suivant de manière efficace et claire. L
     )
 
 
+
 def prompt_aime_fr(line, task_name: str = None):
     MATH_QUERY_TEMPLATE = """
 Résous clairement et efficacement le problème de mathématiques suivant. La dernière ligne de ta réponse doit être au format suivant : 'Donc, la réponse finale est : $\\boxed{{RÉPONSE}}$. J’espère que c’est correct' (sans les guillemets), où RÉPONSE est simplement le nombre ou l’expression finale qui résout le problème. Réfléchis étape par étape avant de répondre.

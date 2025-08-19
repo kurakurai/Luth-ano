@@ -80,6 +80,23 @@ math_500_fr_task = LightevalTaskConfig(
     version="0.1",
 )
 
+# Scholar-100-fr task
+scholar_100_fr_task = LightevalTaskConfig(
+    name="scholar_100_fr",
+    prompt_function=custom_prompt.prompt_math_500_fr,
+    suite=["community"],
+    hf_repo="kurakurai/Scholar-100",
+    hf_subset="default",
+    metric=[custom_metric.math_fr_pass_at_1_1n],
+    hf_avail_splits=["French"],
+    evaluation_splits=["French"],
+    few_shots_split="train",
+    few_shots_select="random",
+    generation_size=1024 if not enable_thinking else 8192,
+    stop_sequence=[],  # no stop sequence, will use eot token
+    version="0.1",
+)
+
 # IFEVal-fr task
 ifeval_fr_task = LightevalTaskConfig(
     name="ifeval_fr",
@@ -821,6 +838,7 @@ TASKS_TABLE = [
     arc_challenge_fr_task,
     aime24_fr_task,
     math_500_fr_task,
+    scholar_100_fr_task,
     math_lvl5_fr_task,
     ifeval_fr_task,
     gpqa_diamond_fr_task,
