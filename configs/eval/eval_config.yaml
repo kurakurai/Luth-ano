@@ -1,7 +1,8 @@
 model:
+  #model_name: "kurakurai/Luth-1.7B-Instruct"
   model_name: "kurakurai/Luth-LFM2-350M"
   dtype: "bfloat16"
-  gpu_memory_utilization: 0.6
+  gpu_memory_utilization: 0.8
   max_model_length: 16384
   
 
@@ -10,7 +11,7 @@ model_parameters:
   max_new_tokens: 8192
 
 extras:
-  enable_prefix_caching: false
+  enable_prefix_caching: false #Set to false for LFM2 models
   enable_thinking: false
   answer_token: "</think>"  
   use_chat_template: true
