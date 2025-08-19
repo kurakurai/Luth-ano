@@ -83,7 +83,7 @@ math_500_fr_task = LightevalTaskConfig(
 # Scholar-100-fr task
 scholar_100_fr_task = LightevalTaskConfig(
     name="scholar_100_fr",
-    prompt_function=custom_prompt.prompt_math_500_fr,
+    prompt_function=custom_prompt.prompt_scholar_100_fr,
     suite=["community"],
     hf_repo="kurakurai/Scholar-100",
     hf_subset="default",

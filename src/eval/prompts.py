@@ -300,6 +300,20 @@ Résous le problème de mathématiques suivant de manière efficace et claire. L
         choices=[line["solution"]],
     )
 
+def prompt_scholar_100_fr(line, task_name: str = None):
+    MATH_QUERY_TEMPLATE = """
+Résous le problème de mathématiques suivant de manière efficace et claire. La dernière ligne de ta réponse doit être au format suivant : 'Donc, la réponse finale est : $\\boxed{{RÉPONSE}}$. J’espère que c’est correct' (sans les guillemets), où RÉPONSE est simplement le nombre ou l’expression qui résout le problème. Raisonne étape par étape avant de répondre. 
+Si le problème est sous forme de questions à choix multiples, recopie la bonne réponse et non la lettre de la bonne réponse.
+
+{Question}
+""".strip()
+    return Doc(
+        task_name=task_name,
+        query=MATH_QUERY_TEMPLATE.format(Question=line["problem"]),
+        gold_index=0,
+        choices=[line["solution"]],
+    )
+
 
 
 def prompt_aime_fr(line, task_name: str = None):
