@@ -239,8 +239,8 @@ def extract_gold(text: str) -> list[str]:
     return [text]
 
 
-scholar_fr_pass_at_1_1n = SampleLevelMetric(
-    metric_name="scholar_fr_pass@1:1_samples",
+kholle_pass_at_1_1n = SampleLevelMetric(
+    metric_name="kholle_fr_pass@1:1_samples",
     sample_level_fn=PassAtK(
         k=1,
         n=1,

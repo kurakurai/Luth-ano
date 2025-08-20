@@ -1,9 +1,7 @@
 model:
-  #model_name: "kurakurai/Luth-1.7B-Instruct"
-  model_name: "liquidai/LFM2-700M"
-  #model_name: "kurakurai/Luth-LFM2-350M"
+  model_name: "kurakurai/Luth-0.6B-Instruct"
   dtype: "bfloat16"
-  gpu_memory_utilization: 0.8
+  gpu_memory_utilization: 0.9
   max_model_length: 16384
   
 
@@ -30,7 +28,7 @@ tasks:
   # - "community|math_500_fr|0|0"
   # - "community|arc_challenge_fr|0|0"
   # - "community|hellaswag_fr|0|0"
-  - "community|scholar_100_fr|0|0"
+  - "community|kholle_fr|0|0"
 
 # English tasks
   # - "extended|ifeval|0|0"
