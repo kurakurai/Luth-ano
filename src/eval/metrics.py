@@ -198,7 +198,7 @@ def compare_gold_target2(
 
             # Ensure it's both not empty and equal
             return len(gold) > 0 and len(target) > 0 and gold == target
-
+        
         return False
 
     def compare_single_extraction_wrapper(g, t):
