@@ -316,7 +316,7 @@ def prompt_kholle_fr(line, task_name: str = None):
         task_name=task_name,
         query=MATH_QUERY_TEMPLATE.format(Question=line["problem"]),
         gold_index=0,
-        choices=[line["answer"]],
+        choices=[line["answer"]] if isinstance(line["answer"], str) else line["answer"],
     )
 
 
