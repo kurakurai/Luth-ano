@@ -1,8 +1,8 @@
 models:
-  - model: kurakurai/Luth-0.6B-fr
+  - model: kurakurai/Luth-LFM2-700M-checkpoint-4065
     parameters:
       weight: 0.5
-  - model: kurakurai/Qwen3-0.6B-Instruct
+  - model: LiquidAI/LFM2-700M
     parameters:
       weight: 0.5
 merge_method: linear
