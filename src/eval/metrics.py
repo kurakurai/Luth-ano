@@ -83,6 +83,180 @@ math_fr_pass_at_1_1n = SampleLevelMetric(
 )
 
 
+from sympy import (
+    And,
+    Basic,
+    E,
+    Eq,
+    FiniteSet,
+    Float,
+    GreaterThan,
+    Interval,
+    LessThan,
+    MatrixBase,
+    MatrixExpr,
+    Mul,
+    Number,
+    Rational,
+    Set,
+    StrictGreaterThan,
+    StrictLessThan,
+    Symbol,
+    Tuple,
+    default_sort_key,
+    ordered,
+    simplify,
+)
+from sympy.core.function import UndefinedFunction
+from sympy.core.relational import Relational
+from lighteval.utils.timeout import timeout
+from itertools import product
+from sympy.parsing.latex import parse_latex
+import re
+
+def normalize_expression(expr: str) -> str:
+    """
+    Normalizes a LaTeX or text expression for SymPy comparison:
+    - converts decimal commas to dots
+    - removes LaTeX spaces (\, and ~)
+    - removes common SI units (\text{V}, \text{C}, \text{J}, etc.)
+    - standardizes certain symbols (R–OH -> R-OH, apostrophes)
+    """
+
+    if not isinstance(expr, str):
+        return expr
+
+    expr = expr.replace(r"\,", "")
+    expr = expr.replace("~", "")
+
+    expr = expr.replace("{,}", ".")
+    expr = expr.replace(",", ".")
+
+    expr = expr.replace("’", "'")
+
+    expr = expr.replace("–", "-")
+
+    units = [
+        "V", "A", "Ω", "ohm", "C", "J", "W", "F", "H", "mol", "s", "m", "g", "kg",
+        "N", "Pa", "Hz", "K", "rad", "cd", "lx", "T", "Wb"
+    ]
+
+    for u in units:
+        expr = re.sub(rf"\\text{{\s*{u}\s*}}", "", expr)   # \text{V}
+        expr = re.sub(rf"\\mathrm{{\s*{u}\s*}}", "", expr) # \mathrm{V}
+        expr = re.sub(rf"(?<![A-Za-z]){u}(?![A-Za-z])", "", expr) 
+
+    expr = expr.strip()
+
+    return expr
+
+
+def safe_parse_latex(s: str):
+    '''
+    Extract all contents in \boxed{} and convert it to a datastructure if it's a tuple, a list ...
+    '''
+    s = s.strip()
+    if re.match(r"^[\(\{\[].*[\)\}\]]$", s):
+
+        try:
+            s_clean = s.replace(r"\left", "").replace(r"\right", "")
+            s_clean = s_clean.replace("{", "[").replace("}", "]")
+            return eval(s_clean) 
+        except Exception:
+            return normalize_expression(s)
+    try:
+        return parse_latex(normalize_expression(s))
+    except Exception:
+        return s
+
+
+def compare_gold_target2(
+    gold: list[Basic | MatrixBase | str] | Basic | MatrixBase | str,
+    target: list[Basic | MatrixBase | str] | Basic | MatrixBase | str,
+    precision: int = 6,
+    strict: bool = True,
+    timeout_seconds: int = 3,
+) -> bool:
+    @timeout(timeout_seconds=timeout_seconds)
+    def compare_single_extraction(gold: Basic | MatrixBase | str, target: Basic | MatrixBase | str) -> bool:
+
+        
+        expr1 = safe_parse_latex(gold)
+        expr2 = safe_parse_latex(target)
+        #print(f"gold: {expr1}, target: {expr2}")
+        if isinstance(expr1, (Basic, MatrixBase)) and isinstance(expr2, (Basic, MatrixBase)):
+            return expr1.equals(expr2)
+
+        # For intervals, vectors
+        elif isinstance(expr1, (list, tuple)) and isinstance(expr2, (list, tuple)):
+            return list(expr1) == list(expr2)
+
+        elif isinstance(gold, str) and isinstance(target, str):
+            # We just do string comparison for everything else
+            gold = gold.strip()
+            target = target.strip()
+
+            # Ensure it's both not empty and equal
+            return len(gold) > 0 and len(target) > 0 and gold == target
+
+        return False
+
+    def compare_single_extraction_wrapper(g, t):
+        try:
+            return compare_single_extraction(g, t)
+        except Exception as e:  # noqa: E722
+            print(f"Error when evaluating:{e}")
+            return False
+
+    return any(compare_single_extraction_wrapper(g, t) for g, t in product(gold, target))
+
+    
+def extract_boxed(text: str) -> list[str]:
+    results = []
+    i = 0
+    while True:
+        start = text.find(r"\boxed{", i)
+        if start == -1:
+            break
+        # position après "\boxed{"
+        j = start + len(r"\boxed{")
+        depth = 1
+        content = []
+        while j < len(text) and depth > 0:
+            if text[j] == "{":
+                depth += 1
+            elif text[j] == "}":
+                depth -= 1
+                if depth == 0:
+                    break
+            content.append(text[j])
+            j += 1
+        results.append("".join(content)) 
+        i = j + 1
+    return results
+
+def extract_gold(text: str) -> list[str]:
+    return [text]
+
+
+kholle_pass_at_1_1n = SampleLevelMetric(
+    metric_name="kholle_fr_pass@1:1_samples",
+    sample_level_fn=PassAtK(
+        k=1,
+        n=1,
+        strip_strings=True,
+        normalize_gold=lambda k: extract_gold(k) ,
+        # Extracting mathematical expressions and latex expressions
+        normalize_pred=lambda k: extract_boxed(k),
+        # Uses sympy for comparison
+        sample_scoring_function=compare_gold_target2,
+    ).compute,
+    category=MetricCategory.GENERATIVE_SAMPLING,
+    use_case=MetricUseCase.REASONING,
+    corpus_level_fn=np.mean,
+    higher_is_better=True,
+)
+
 class ExactMatchesThinking(ExactMatches):
     """
     A class to compute exact matches for reasoning tasks.

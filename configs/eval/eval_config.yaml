@@ -1,7 +1,7 @@
 model:
-  model_name: "LiquidAI/LFM2-700M"
+  model_name: "kurakurai/Luth-0.6B-Instruct"
   dtype: "bfloat16"
-  gpu_memory_utilization: 0.9
+  gpu_memory_utilization: 0.8
   max_model_length: 16384
   
 
@@ -10,7 +10,7 @@ model_parameters:
   max_new_tokens: 8192
 
 extras:
-  enable_prefix_caching: false
+  enable_prefix_caching: true #Set to false for LFM2 models
   enable_thinking: false
   answer_token: "</think>"  
   use_chat_template: true
@@ -22,12 +22,13 @@ extras:
 
 tasks:
 # French tasks
-  - "community|ifeval_fr|0|0"
-  - "community|gpqa_fr|0|0"
-  - "community|mmlu_fr|0|0"
-  - "community|math_500_fr|0|0"
-  - "community|arc_challenge_fr|0|0"
-  - "community|hellaswag_fr|0|0"
+  # - "community|ifeval_fr|0|0"
+  # - "community|gpqa_fr|0|0"
+  # - "community|mmlu_fr|0|0"
+  # - "community|math_500_fr|0|0"
+  # - "community|arc_challenge_fr|0|0"
+  # - "community|hellaswag_fr|0|0"
+  - "community|kholle_fr|0|0"
 
 # English tasks
   # - "extended|ifeval|0|0"

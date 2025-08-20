@@ -300,6 +300,25 @@ Résous le problème de mathématiques suivant de manière efficace et claire. L
         choices=[line["solution"]],
     )
 
+def prompt_kholle_fr(line, task_name: str = None):
+    MATH_QUERY_TEMPLATE = """
+    Tu résous des exercices de maths/physique/svt.  
+    Règles à respecter obligatoirement :  
+    1. Tu dois raisonner étape par étape (ne jamais donner la réponse directement).  
+    2. La dernière ligne doit toujours être de la forme :  
+    Donc, la réponse finale est : $\\boxed{{RÉPONSE}}$. J’espère que c’est correct
+    (où RÉPONSE est l’expression ou le nombre trouvé).  
+    3. Si la réponse est un QCM: recopier la bonne réponse.
+
+    {Question}
+    """.strip()
+    return Doc(
+        task_name=task_name,
+        query=MATH_QUERY_TEMPLATE.format(Question=line["problem"]),
+        gold_index=0,
+        choices=[line["answer"]],
+    )
+
 
 def prompt_aime_fr(line, task_name: str = None):
     MATH_QUERY_TEMPLATE = """
