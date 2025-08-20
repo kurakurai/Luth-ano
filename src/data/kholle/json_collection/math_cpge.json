@@ -1,0 +1,402 @@
+[
+    {
+    "id": 1,
+    "theme": "Analysis",
+    "level": "cpge",
+    "problem": "Calculer la somme : $\\sum_{k=1}^{n} \\left(\\frac{1}{k} - \\frac{1}{n+1-k}\\right)$.",
+    "answer": "0",
+    "solution": "On commence par séparer la somme en deux : $\\sum_{k=1}^{n} \\left(\\frac{1}{k} - \\frac{1}{n+1-k}\\right) = \\sum_{k=1}^{n} \\frac{1}{k} - \\sum_{k=1}^{n} \\frac{1}{n+1-k}$. On effectue ensuite le changement d'indice $j = n+1-k$ dans la deuxième somme, ce qui donne $\\sum_{k=1}^{n} \\frac{1}{n+1-k} = \\sum_{j=1}^{n} \\frac{1}{j}$. Ainsi, la somme devient $\\sum_{k=1}^{n} \\frac{1}{k} - \\sum_{k=1}^{n} \\frac{1}{k} = 0$."
+    },
+    {
+    "id": 2,
+    "theme": "Analysis",
+    "level": "cpge",
+    "problem": "Calculer la somme suivante : $\\sum_{k=1}^{n} (n - k + 1)$. Quelle est la bonne réponse ? \n- $n^2$ \n- $\\frac{n(n+1)}{2}$ \n- $n(n-1)$ \n- $2n$",
+    "answer": "\\frac{n(n+1)}{2}",
+    "solution": "Effectuons le changement d'indice $\\ell = n - k + 1$. Lorsque $k$ varie de 1 à $n$, $\\ell$ varie aussi de 1 à $n$. Ainsi, $\\sum_{k=1}^{n} (n - k + 1) = \\sum_{\\ell=1}^{n} \\ell = \\frac{n(n+1)}{2}$."
+    },
+    {
+    "id": 3,
+    "theme": "Trigonometry",
+    "level": "cpge",
+    "problem": "Résoudre sur $\\mathbb{R}$ l'inéquation : $\\tan x \\ge 1$. Quelle est la bonne réponse ? \n- $\\bigcup_{k \\in \\mathbb{Z}} [0 + k\\pi, \\pi/4 + k\\pi[$ \n- $\\bigcup_{k \\in \\mathbb{Z}} [\\pi/4 + k\\pi, \\pi/2 + k\\pi[$ \n- $\\bigcup_{k \\in \\mathbb{Z}} [\\pi/2 + k\\pi, \\pi + k\\pi[$ \n- $\\bigcup_{k \\in \\mathbb{Z}} [-\\pi/4 + k\\pi, \\pi/4 + k\\pi[$",
+    "answer": "\\bigcup_{k \\in \\mathbb{Z}} [\\pi/4 + k\\pi, \\pi/2 + k\\pi[",
+    "solution": "On considère un intervalle de longueur $\\pi$. Comme $\\tan(\\pi/4) = 1$, l'inéquation $\\tan x \\ge 1$ est vérifiée pour $x$ dans $[\\pi/4, \\pi/2[$. En ajoutant $k\\pi$ pour tout $k \\in \\mathbb{Z}$, on obtient l'ensemble des solutions $S = \\bigcup_{k \\in \\mathbb{Z}} [\\pi/4 + k\\pi, \\pi/2 + k\\pi[$."
+    },
+    {
+    "id": 4,
+    "theme": "Exponential Equations",
+    "level": "cpge",
+    "problem": "Résoudre sur $\\mathbb{R}$ l'équation : $e^{2x} - e^x - 6 = 0$.",
+    "answer": "\\ln(3)",
+    "solution": "On pose $X = e^x$. L'équation devient $X^2 - X - 6 = 0$. Les racines de cette équation sont $X = -2$ et $X = 3$. Comme $e^x > 0$, seule la racine positive $X = 3$ est valable. Donc $e^x = 3$, ce qui donne $x = \\ln(3)$."
+    },
+    {
+    "id": 5,
+    "theme": "Limits",
+    "level": "cpge",
+    "problem": "Déterminer la limite suivante : $\\lim_{x\\to +\\infty} \\frac{e^x}{2e^x + e^{-2x}}$.",
+    "answer": "\\frac{1}{2}",
+    "solution": "On factorise par $e^x$ au dénominateur : $\\frac{e^x}{2e^x + e^{-2x}} = \\frac{1}{2 + e^{-3x}}$. Or $\\lim_{x\\to +\\infty} e^{-3x} = 0$, donc la limite vaut $\\frac{1}{2+0} = \\frac{1}{2}$."
+    },
+    {
+    "id": 6,
+    "theme": "Limits",
+    "level": "cpge",
+    "problem": "Déterminer la limite suivante : $\\lim_{x\\to -\\infty} \\frac{e^x}{2e^x + e^{-2x}}$.",
+    "answer": "0",
+    "solution": "Quand $x\\to -\\infty$, $e^x\\to 0$ et $e^{-2x}\\to +\\infty$, donc $2e^x + e^{-2x}\\sim e^{-2x}\\to +\\infty$. Par quotient, $\\frac{e^x}{2e^x + e^{-2x}}\\to 0$."
+    },
+    {
+    "id": 7,
+    "theme": "Number Theory",
+    "level": "cpge",
+    "problem": "Quels sont les diviseurs positifs communs à 390 et 525 ? \n- {1, 3, 5, 15} \n- {1, 5, 25} \n- {1, 2, 5, 10} \n- {1, 3, 9, 27}",
+    "answer": "{1, 3, 5, 15}",
+    "solution": "On calcule le pgcd de 390 et 525 avec l'algorithme d'Euclide : $\\text{pgcd}(390, 525) = 15$. Les diviseurs communs de 390 et 525 sont donc les diviseurs positifs de 15, soit {1, 3, 5, 15}."
+    },
+    {
+    "id": 8,
+    "theme": "Number Theory",
+    "level": "cpge",
+    "problem": "Soient $n \\in \\mathbb{Z}$. Calculer le pgcd suivant : $\\gcd(n^2+n, 2n+1)$.",
+    "answer": "1",
+    "solution": "On remarque que $4(n^2+n) = (2n+1)^2 - 1$. Ainsi, si $d$ divise à la fois $n^2+n$ et $2n+1$, alors $d$ divise aussi 1. Donc $\\gcd(n^2+n, 2n+1) = 1$."
+    },
+    {
+    "id": 9,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Soit $E_1=\\{P\\in\\mathbb{R}[X]\\;:\\;P(0)=P(2)\\}$. Déterminer si $E_1$ est un sous-espace vectoriel de $\\mathbb{R}[X]$. Répondre par 1 si Oui et 0 si Non.",
+    "answer": "1",
+    "solution": "On vérifie les propriétés d'un sous-espace vectoriel : (i) le polynôme nul est bien dans $E_1$, (ii) si $P,Q\\in E_1$, alors $P+Q\\in E_1$, (iii) si $P\\in E_1$ et $\\lambda\\in\\mathbb{R}$, alors $\\lambda P\\in E_1$. Donc $E_1$ est un sous-espace vectoriel, la réponse est 1."
+    },
+    {
+    "id": 10,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Soit $E_2=\\{P\\in\\mathbb{R}[X]\\;:\\;P'(0)=2\\}$. Déterminer si $E_2$ est un sous-espace vectoriel de $\\mathbb{R}[X]$. Répondre par 1 si Oui et 0 si Non.",
+    "answer": "0",
+    "solution": "Le polynôme nul n'est pas dans $E_2$, car $0'(0)=0\\neq 2$. Un sous-espace doit contenir le vecteur nul, donc $E_2$ n'est pas un sous-espace vectoriel. La réponse est 0."
+    },
+    {
+    "id": 11,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Les vecteurs $u=( 1,2,3)$ et $v=(-1,4,6)$ dans $\\mathbb{R}^3$. La famille $(u,v)$ est-elle libre ? Répondre par 1 si Oui et 0 si Non.",
+    "answer": "1",
+    "solution": "Pour être proportionnels il faudrait un scalaire $\\lambda$ tel que $v=\\lambda u$. Les rapports composante à composante sont $-1/1=-1$, $4/2=2$ et $6/3=2$, qui ne sont pas tous égaux. Donc $u$ et $v$ ne sont pas proportionnels, la famille $(u,v)$ est libre. Réponse : 1."
+    },
+    {
+    "id": 12,
+    "theme": "Combinatorics",
+    "level": "cpge",
+    "problem": "Une course oppose 20 concurrents, dont Émile. Combien y a-t-il de podiums possibles ? \n- 6840 \n- 116280 \n- 7980 \n- 684",
+    "answer": "6840",
+    "solution": "Pour le premier, on a 20 choix possibles, pour le second 19, pour le troisième 18. Le nombre de podiums possibles est donc $20 \\times 19 \\times 18 = 6840$."
+    },
+    {
+    "id": 13,
+    "theme": "Combinatorics",
+    "level": "cpge",
+    "problem": "Combien y a-t-il de façons de répartir les 52 cartes d'un jeu entre 4 joueurs N, S, E, O, chacun possédant 13 cartes ? \n- 52! / (13!)^4 \n- (52! * 4!) / (13!)^4 \n- 52! / (4! * 13!) \n- (52! / (13!)^4) * 4!",
+    "answer": "52! / (13!)^4",
+    "solution": "Il y a (52 choose 13) choix pour le premier joueur, (39 choose 13) pour le deuxième, (26 choose 13) pour le troisième, et le dernier prend les 13 cartes restantes. En factorielle : $\\binom{52}{13}\\binom{39}{13}\\binom{26}{13} = 52! / (13!)^4$."
+    },
+    {
+    "id": 14,
+    "theme": "Probability",
+    "level": "cpge",
+    "problem": "On tire simultanément trois cartes au hasard dans un paquet de 32 cartes. Quelle est la probabilité de n'obtenir que des cœurs ?",
+    "answer": "7/620",
+    "solution": "Le nombre de tirages de 3 cœurs parmi 8 est C(8,3) = 56. Le nombre total de tirages de 3 cartes parmi 32 est C(32,3) = 4960. La probabilité est donc 56/4960 = 7/620."
+    },
+    {
+    "id": 15,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Les applications suivantes définissent-elles un produit scalaire sur R² ?\n\nφ₁((x₁,x₂),(y₁,y₂)) = √(x₁² + y₁² + x₂² + y₂²)",
+    "answer": "0",
+    "solution": "φ₁ n'est pas bilinéaire. Par exemple, pour u=(1,1), φ₁(2u,u) = √10 alors que 2 φ₁(u,u) = 2√4 = 4. Donc φ₁ n'est pas un produit scalaire."
+    },
+    {
+    "id": 16,
+    "theme": "Combinatoire",
+    "level": "cpge",
+    "problem": "Soit n≥4 et a,b,c,d∈{1,…,n} tous distincts. Que vaut (a b)∘(c d)∘(d a) ?",
+    "answer": "(a c d b)",
+    "solution": "On calcule l'image de chaque élément sous la permutation composée. Les éléments autres que a,b,c,d sont fixés. Pour a: a→d→c→a, pour b: b→a→b, pour c: c→b→d→c, pour d: d→c→d. On en déduit que la permutation correspond au cycle (a c d b)."
+    },
+    {
+    "id": 17,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Calculer le rang de la matrice A = [[1,2,3],[2,3,4],[3,4,5]].",
+    "answer": "2",
+    "solution": "On utilise la méthode du pivot de Gauss pour mettre la matrice sous forme échelonnée. Après élimination, on obtient : [[1,2,3],[0,-1,-2],[0,0,0]]. La matrice a donc 2 lignes non nulles, donc rg(A) = 2."
+    },
+    {
+    "id": 18,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Calculer le rang de la matrice B = [[1,1,1],[1,2,4],[1,3,9]].",
+    "answer": "3",
+    "solution": "La matrice B est une matrice de Vandermonde 3x3 avec colonnes distinctes. En utilisant la méthode du pivot de Gauss, aucune ligne ne devient nulle après élimination. Ainsi, le rang de B est 3."
+    },
+    {
+    "id": 19,
+    "theme": "Linear Algebra",
+    "level": "cpge",
+    "problem": "Dimension du sous-espace engendré par $(1,2,3)$ et $(4,5,6)$ dans $\\mathbb{R}^3$.",
+    "answer": "2",
+    "solution": "Ils ne sont pas colinéaires : dimension $2$."
+    },
+    {
+    "id": 20,
+    "theme": "Calculus",
+    "level": "cpge",
+    "problem": "Soient $m,n\\in\\mathbb{Z}$ avec $n\\ge m$. Calculer $\\displaystyle \\int_m^n \\lfloor x \\rfloor \\, dx$.",
+    "answer": "\\frac{(n-m)(n+m-1)}{2}",
+    "solution": "Pour tout entier $p$, on a\n$$\\int_p^{p+1} \\lfloor x \\rfloor \\, dx = \\int_p^{p+1} p \\, dx = p.$$ \nAinsi, on peut découper l'intégrale en intervalles unitaires :\n$$\\int_m^n \\lfloor x \\rfloor \\, dx = \\sum_{p=m}^{n-1} \\int_p^{p+1} \\lfloor x \\rfloor \\, dx = \\sum_{p=m}^{n-1} p.$$ \nCette somme est une suite arithmétique, donc\n$$\\sum_{p=m}^{n-1} p = \\frac{(n-m)(n+m-1)}{2}.$$"
+    },
+    {
+    "id": 21,
+    "theme": "Calculus",
+    "level": "cpge",
+    "problem": "Calculer \\[ \\int_{-1}^{2} x |x| \\, dx. \\]",
+    "answer": "\\frac{7}{3}",
+    "solution": "On découpe l'intégrale en deux intervalles où $|x|$ s'exprime facilement :\n\\[ \\int_{-1}^{2} x|x| \\, dx = \\int_{-1}^{0} x|x| \\, dx + \\int_{0}^{2} x|x| \\, dx. \\]\n\nPour $x \\in [-1,0]$, $|x| = -x$, donc $\\int_{-1}^{0} x|x| \\, dx = \\int_{-1}^{0} -x^2 \\, dx = [-x^3/3]_{-1}^{0} = 1/3$.\n\nPour $x \\in [0,2]$, $|x| = x$, donc $\\int_{0}^{2} x|x| \\, dx = \\int_{0}^{2} x^2 \\, dx = [x^3/3]_{0}^{2} = 8/3$.\n\nEn sommant les deux contributions : $1/3 + 8/3 = 7/3$."
+    },
+    {
+    "id": 22,
+    "theme": "Analysis",
+    "level": "cpge",
+    "problem": "Déterminer la limite de \n\\[ v_n = \\left( \\prod_{k=1}^{n} (k+n) \\right)^{1/n}. \\]",
+    "answer": "\\frac{4}{e}",
+    "solution": "On réécrit \\(v_n\\) comme :\n\\[ v_n = \\exp\\left( \\frac{1}{n} \\sum_{k=1}^{n} \\ln(k+n) \\right). \\]\n\nPosons \\(f(x) = \\ln(x)\\) sur [1,2]. La somme\n\\[ S_n(f) = \\frac{1}{n} \\sum_{k=1}^{n} \\ln\\left(n + k\\right) - \\ln(n) = \\frac{1}{n} \\sum_{k=1}^{n} \\ln\\left(1 + \\frac{k}{n}\\right) \\]\nest une somme de Riemann de \\(f\\) sur [1,2]. Par le théorème des sommes de Riemann :\n\\[ S_n(f) \\to \\int_1^2 \\ln(x) \\, dx = [x\\ln x - x]_1^2 = 2\\ln 2 - 1. \\]\n\nAinsi, \\(v_n \\to \\exp(2\\ln 2 - 1) = \\frac{4}{e}.\\)"
+    },
+    {
+    "id": 23,
+    "theme": "Polynomials",
+    "level": "cpge",
+    "problem": "Diviser \\(X^4 + 5X^3 + 12X^2 + 19X - 7\\) par \\(X^2 + 3X - 1\\) et donner le quotient.",
+    "answer": "X^2 + 2X + 7" ,
+    "solution": "Effectuons la division euclidienne :\n\n1. Divisons le terme de plus haut degré : X^4 / X^2 = X^2 → premier terme du quotient.\n2. Multiplions : X^2*(X^2 + 3X - 1) = X^4 + 3X^3 - X^2.\n3. Soustrayons : (X^4 + 5X^3 + 12X^2 + 19X - 7) - (X^4 + 3X^3 - X^2) = 2X^3 + 13X^2 + 19X - 7.\n4. Divisons 2X^3 / X^2 = 2X → deuxième terme du quotient.\n5. Multiplions et soustrayons : 2X*(X^2 + 3X - 1) = 2X^3 + 6X^2 - 2X → reste = 7X^2 + 21X - 7.\n6. Divisons 7X^2 / X^2 = 7 → troisième terme du quotient.\n7. Multiplions et soustrayons : 7*(X^2 + 3X - 1) = 7X^2 + 21X - 7 → reste = 0.\n\nAinsi, le quotient est X^2 + 2X + 7 et le reste est nul."
+    },
+    {
+    "id": 24,
+    "theme": "Polynomials",
+    "level": "cpge",
+    "problem": "Soit $P \\in K[X]$, et $a, b \\in K$ avec $a \\neq b$. Soit $R$ le reste de la division euclidienne de $P$ par $(X - a)(X - b)$. Exprimer $R$ en fonction de $P(a)$ et $P(b)$.",
+    "answer": "\\frac{P(a) - P(b)}{a - b} X + \\frac{a P(b) - b P(a)}{a - b}",
+    "solution": "Le reste $R$ est de degré au plus 1, donc $R(X) = \\alpha X + \\beta$. \n\nOn écrit : \n$$P(X) = (X - a)(X - b) Q(X) + \\alpha X + \\beta.$$ \nEn évaluant en $X = a$ et $X = b$, on obtient le système :\n$$\\begin{cases}\n\\alpha a + \\beta = P(a), \\\\\n\\alpha b + \\beta = P(b)\n\\end{cases}$$\nRésolvant ce système, on trouve :\n$$\\alpha = \\frac{P(a) - P(b)}{a - b}, \\quad \\beta = \\frac{a P(b) - b P(a)}{a - b}.$$ \nAinsi, \n$$R(X) = \\frac{P(a) - P(b)}{a - b} X + \\frac{a P(b) - b P(a)}{a - b}.$$"
+    },
+    {
+    "id": 25,
+    "theme": "Polynomials",
+    "level": "cpge",
+    "problem": "Soient n, m ≥ 1. Déterminer le pgcd de X^n − 1 et X^m − 1.",
+    "answer": "X^{\\gcd(n,m)} - 1",
+    "solution": "On applique l'algorithme d'Euclide sur les polynômes. Supposons n > m et écrivons n = m p + r avec 0 ≤ r < m.\nAlors on a :\nX^n - 1 = X^{mp+r} - 1 = X^r (X^{mp} - 1) + (X^r - 1).\nOr X^{mp} - 1 est divisible par X^m - 1, donc\n\\gcd(X^n - 1, X^m - 1) = \\gcd(X^m - 1, X^r - 1).\nPar récurrence et en utilisant l'algorithme d'Euclide sur les entiers, on obtient finalement :\n\\[\n\\gcd(X^n - 1, X^m - 1) = X^{\\gcd(n,m)} - 1.\n\\]"
+    },
+    {
+    "id": 26,
+    "theme": "Integrals",
+    "level": "cpge",
+    "problem": "Déterminer toutes les primitives de la fonction f_1(x) = 5x^3 − 3x + 7 sur R.\n\n\n- F(x) = \\frac{5}{4} x^4 - \\frac{3}{2} x^2 + 7x + C, C \\in \\mathbb{R}\n \n- F(x) = 5 x^4 - 3 x^2 + 7x + C, C \\in \\mathbb{R}\n \n- F(x) = \\frac{5}{3} x^3 - \\frac{3}{2} x^2 + 7x + C, C \\in \\mathbb{R}\n \n- F(x) = \\frac{5}{4} x^4 - 3 x^2 + 7x + C, C \\in \\mathbb{R}",
+    "answer": "F(x) = \\frac{5}{4} x^4 - \\frac{3}{2} x^2 + 7x + C, C \\in \\mathbb{R}",
+    "solution": "Pour trouver la primitive d'un polynôme, on utilise la formule générale : \\[ \\int x^n dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1). \\] Appliquons-la terme par terme : \\[ \\int 5x^3 dx = \\frac{5}{4} x^4, \\quad \\int (-3x) dx = -\\frac{3}{2} x^2, \\quad \\int 7 dx = 7x. \\] Ainsi, toutes les primitives de f_1 sont données par : \\[ F(x) = \\frac{5}{4} x^4 - \\frac{3}{2} x^2 + 7x + C, \\quad C \\in \\mathbb{R}. \\]"
+    },
+    {
+    "id": 27,
+    "theme": "Integrals",
+    "level": "cpge",
+    "problem": "Calculer l'intégrale suivante :\n\\[ \\int_0^{\\pi/3} (1 - \\cos(3x)) \\, dx \\]\n\n \n- \\frac{\\pi}{3}\n \n- \\frac{2\\pi}{3}\n \n- 1\n \n- 0",
+    "answer": "\\frac{\\pi}{3}",
+    "solution": "Une primitive de x \\mapsto 1 est F(x) = x, et une primitive de x \\mapsto \\cos(3x) est F(x) = \\frac{1}{3} \\sin(3x). Ainsi, \\[ \\int_0^{\\pi/3} (1 - \\cos(3x)) \\, dx = \\Big[x - \\frac{1}{3} \\sin(3x)\\Big]_0^{\\pi/3} = \\frac{\\pi}{3}. \\]"
+    },
+    {
+    "id": 28,
+    "theme": "Inegrals",
+    "level": "cpge",
+    "problem": "Calculer l'intégrale suivante :\n\\[ \\int_0^{\\sqrt{\\pi}} x \\sin(x^2) \\, dx \\]\n\n \n- 0\n \n- 1\n \n- -1\n \n- \\frac{\\pi}{2}",
+    "answer": "1",
+    "solution": "On reconnaît la dérivée de u(x) = x^2, ainsi \\[ \\int_0^{\\sqrt{\\pi}} x \\sin(x^2) \\, dx = \\int_0^{\\sqrt{\\pi}} \\frac{1}{2} u'(x) \\sin(u(x)) \\, dx = \\Big[-\\frac{1}{2} \\cos(x^2)\\Big]_0^{\\sqrt{\\pi}} = 1. \\]"
+    },
+    {
+    "id": 29,
+    "theme": "Integrals",
+    "level": "cpge",
+    "problem": "Calculer l'intégrale suivante :\n\\[ \\int_1^2 \\frac{\\sqrt{\\ln(x)}}{x} \\, dx \\]\n\n \n- \\frac{1}{2} (\\ln 2)^{3/2}\n \n- \\frac{2}{3} (\\ln 2)^{3/2}\n \n- (\\ln 2)^{1/2}\n \n- \\frac{3}{2} (\\ln 2)^{3/2}",
+    "answer": "\\frac{2}{3} (\\ln 2)^{3/2}",
+    "solution": "On pose u(x) = ln(x), alors u'(x) = 1/x. L'intégrale devient : \\[ \\int_1^2 \\frac{\\sqrt{\\ln(x)}}{x} \\, dx = \\int_0^{\\ln 2} u^{1/2} \\, du = \\Big[ \\frac{2}{3} u^{3/2} \\Big]_0^{\\ln 2} = \\frac{2}{3} (\\ln 2)^{3/2}. \\]"
+    },
+    {
+    "id": 30,
+    "theme": "Integrals",
+    "level": "cpge",
+    "problem": "Calculer l'intégrale suivante :\n\\[ I = \\int_0^1 x e^x \\, dx \\]",
+    "answer": "1",
+    "solution": "On utilise l'intégration par parties en posant :\n\\[ u(x) = x, \\quad u'(x) = 1, \\quad v'(x) = e^x, \\quad v(x) = e^x. \\]\nAlors :\n\\[ \\int_0^1 x e^x \\, dx = [x e^x]_0^1 - \\int_0^1 e^x \\, dx = (1\\cdot e^1 - 0\\cdot e^0) - (e^1 - e^0) = e - (e - 1) = 1. \\]"
+    },
+    {
+    "id": 31,
+    "theme": "Integrals",
+    "level": "cpge",
+    "problem": "Calculer l'intégrale suivante :\n\\[ J = \\int_1^e x^2 \\ln x \\, dx \\]\n\nQuel est le résultat ?\n \n- \\(\\frac{2 e^3 + 1}{9}\\)\n \n- \\(\\frac{e^3 - 1}{3}\\)\n \n- \\(\\frac{e^3 + 1}{6}\\)\n \n- \\(e^3 - \\frac{1}{3}\\)",
+    "answer": "\\frac{2 e^3 + 1}{9}",
+    "solution": "On utilise l'intégration par parties en posant :\n\\[ u(x) = \\ln x, \\quad u'(x) = \\frac{1}{x}, \\quad v'(x) = x^2, \\quad v(x) = \\frac{x^3}{3}. \\]\nAlors :\n\\[ \\int_1^e x^2 \\ln x \\, dx = \\left[ \\frac{x^3}{3} \\ln x \\right]_1^e - \\int_1^e \\frac{x^3}{3} \\cdot \\frac{1}{x} \\, dx = \\left[ \\frac{x^3}{3} \\ln x \\right]_1^e - \\frac{1}{3} \\int_1^e x^2 \\, dx. \\]\nCalculons chaque terme :\n\\[ \\left[ \\frac{x^3}{3} \\ln x \\right]_1^e = \\frac{e^3}{3} - 0 = \\frac{e^3}{3}, \\quad \\frac{1}{3} \\int_1^e x^2 \\, dx = \\frac{1}{3} \\cdot \\frac{e^3 - 1}{3} = \\frac{e^3 - 1}{9}. \\]\nDonc :\n\\[ J = \\frac{e^3}{3} - \\frac{e^3 - 1}{9} = \\frac{3 e^3 - (e^3 - 1)}{9} = \\frac{2 e^3 + 1}{9}. \\]"
+    },
+    {
+    "id": 32,
+    "theme": "Differential Equations",
+    "level": "cpge",
+    "problem": "Déterminer la solution de l'équation différentielle \n\\[ y' + 2y = -4, \\quad y(1) = -3. \\]",
+    "answer": "y(t) = -2 - e^2 e^{-2t}",
+    "solution": "On commence par résoudre l'équation homogène :\n\\[ y' + 2y = 0 \\]\nLes solutions sont de la forme :\n\\[ y_h(t) = C e^{-2t}, \\quad C \\in \\mathbb{R}. \\]\nCherchons une solution particulière de l'équation complète. Une fonction constante convient :\n\\[ y_p(t) = -2 \\]\nEn effet, \\(y_p' + 2y_p = 0 + 2(-2) = -4\\).\nAinsi, la solution générale est :\n\\[ y(t) = y_p(t) + y_h(t) = -2 + C e^{-2t}. \\]\nEn utilisant la condition initiale \\(y(1) = -3\\) :\n\\[ -2 + C e^{-2} = -3 \\implies C = -e^2. \\]\nDonc la solution particulière est :\n\\[ \\boxed{y(t) = -2 - e^2 e^{-2t} = -2 - e^{2-2t}}. \\]"
+    },
+    {
+    "id": 33,
+    "theme": "Differential Equations",
+    "level": "cpge",
+    "problem": "Résoudre l'équation différentielle suivante sur \\(\\mathbb{R}\\) :\n\\[ y' + x^2 y = -x^2. \\]\n\n \n- \\(y(x) = -1 + e^{-x^3/3}\\)\n\n \n- \\(y(x) = -1 + \\lambda e^{-x^3/3}, \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = \\lambda e^{-x^3/3}, \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = -x^2 + \\lambda e^{-x^3/3}, \\lambda \\in \\mathbb{R}\\)",
+    "answer": "y(x) = -1 + \\lambda e^{-x^3/3}, \\lambda \\in \\mathbb{R}",
+    "solution": "On commence par résoudre l'équation homogène :\n\\[ y' + x^2 y = 0. \\]\nUne primitive de \\(x^2\\) est \\(x^3/3\\), donc les solutions de l'équation homogène sont :\n\\[ y_h(x) = \\lambda e^{-x^3/3}, \\quad \\lambda \\in \\mathbb{R}. \\]\nPour trouver une solution particulière de l'équation complète, on remarque que la constante \\(y_p(x) = -1\\) convient car :\n\\[ y_p' + x^2 y_p = 0 + x^2(-1) = -x^2. \\]\nAinsi, la solution générale est :\n\\[ y(x) = -1 + \\lambda e^{-x^3/3}, \\quad \\lambda \\in \\mathbb{R}. \\]"
+    },
+    {
+    "id": 34,
+    "theme": "Differential Equations",
+    "level": "cpge",
+    "problem": "Résoudre l'équation différentielle suivante sur \\(\\mathbb{R}\\) :\n\\[ y' + y = \\frac{1}{1+e^x}. \\]\n\n \n- \\(y(x) = e^{-x} \\ln(1+e^x)\\)\n\n \n- \\(y(x) = \\lambda e^{-x}, \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = e^{-x} \\ln(1+e^x) + \\lambda e^{-x}, \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = \\frac{1}{1+e^x} + \\lambda e^{-x}, \\lambda \\in \\mathbb{R}\\)",
+    "answer": "y(x) = e^{-x} \\ln(1+e^x) + \\lambda e^{-x}, \\lambda \\in \\mathbb{R}",
+    "solution": "On commence par résoudre l'équation homogène :\n\\[ y' + y = 0. \\]\nLa solution générale est :\n\\[ y_h(x) = \\lambda e^{-x}, \\quad \\lambda \\in \\mathbb{R}. \\]\nOn cherche une solution particulière sous la forme \\(y_p(x) = \\lambda(x) e^{-x}\\), alors :\n\\[ y_p'(x) = \\lambda'(x) e^{-x} - \\lambda(x) e^{-x}. \\]\nEn substituant dans l'équation :\n\\[ \\lambda'(x) e^{-x} - \\lambda(x) e^{-x} + \\lambda(x) e^{-x} = \\frac{1}{1+e^x} \\Rightarrow \\lambda'(x) e^{-x} = \\frac{1}{1+e^x} \\Rightarrow \\lambda'(x) = \\frac{e^x}{1+e^x}. \\]\nUne primitive de \\(e^x/(1+e^x)\\) est \\(\\ln(1+e^x)\\). Donc une solution particulière est :\n\\[ y_p(x) = e^{-x} \\ln(1+e^x). \\]\nAinsi, la solution générale est :\n\\[ y(x) = e^{-x} \\ln(1+e^x) + \\lambda e^{-x}, \\quad \\lambda \\in \\mathbb{R}. \\]"
+    },
+    {
+    "id": 35,
+    "theme": "Differential Equations",
+    "level": "cpge",
+    "problem": "Résoudre l'équation différentielle suivante sur \\(]-1,+\\infty[\\) :\n\\[ (1+x)y' + y = 1 + \\ln(1+x). \\]\n\n \n- \\(y(x) = \\frac{1}{1+x} + \\ln(1+x)\\)\n\n \n- \\(y(x) = \\lambda (1+x), \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = \\frac{\\lambda}{1+x} + \\ln(1+x), \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = \\frac{\\lambda}{1+x} + (1+x)\\ln(1+x), \\lambda \\in \\mathbb{R}\\)",
+    "answer": "y(x) = \\frac{\\lambda}{1+x} + (1+x)\\ln(1+x), \\lambda \\in \\mathbb{R}",
+    "solution": "On commence par résoudre l'équation homogène :\n\\[ (1+x)y' + y = 0. \\]\nLa solution générale est :\n\\[ y_h(x) = \\frac{\\lambda}{1+x}, \\quad \\lambda \\in \\mathbb{R}. \\]\nOn cherche une solution particulière par variation de la constante, posant \\(y_p(x) = \\lambda(x)/(1+x)\\). Alors :\n\\[ y_p'(x) = \\frac{\\lambda'(x)}{1+x} - \\frac{\\lambda(x)}{(1+x)^2}. \\]\nSubstituons dans l'équation :\n\\[ (1+x)\\left(\\frac{\\lambda'(x)}{1+x} - \\frac{\\lambda(x)}{(1+x)^2}\\right) + \\frac{\\lambda(x)}{1+x} = 1 + \\ln(1+x) \\Rightarrow \\lambda'(x) = 1 + \\ln(1+x). \\]\nUne primitive est \\(\\lambda(x) = (1+x)\\ln(1+x)\\). Ainsi, la solution générale est :\n\\[ y(x) = \\frac{\\lambda}{1+x} + (1+x)\\ln(1+x), \\quad \\lambda \\in \\mathbb{R}. \\]"
+    },
+    {
+    "id": 36,
+    "theme": "Differential Equations",
+    "level": "cpge",
+    "problem": "Résoudre l'équation différentielle suivante sur \\(\\mathbb{R}\\) :\n\\[ y' - 2xy = -(2x-1)e^x. \\]\n\n \n- \\(y(x) = e^x\\)\n\n \n- \\(y(x) = \\lambda e^{x^2}, \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = \\lambda e^{x^2} + e^x, \\lambda \\in \\mathbb{R}\\)\n\n \n- \\(y(x) = e^{-x^2} + x\\)",
+    "answer": "y(x) = \\lambda e^{x^2} + e^x, \\lambda \\in \\mathbb{R}",
+    "solution": "On commence par résoudre l'équation homogène :\n\\[ y' - 2xy = 0. \\]\nEn séparant les variables :\n\\[ \\frac{y'}{y} = 2x \\Rightarrow \\ln|y| = x^2 + C \\Rightarrow y_h(x) = \\lambda e^{x^2}, \\lambda \\in \\mathbb{R}. \\]\nPour une solution particulière, on pose \\(y_p(x) = \\lambda(x) e^{x^2}\\). Alors :\n\\[ y_p'(x) = \\lambda'(x) e^{x^2} + 2x \\lambda(x) e^{x^2}. \\]\nSubstituons dans l'équation :\n\\[ y_p' - 2xy_p = \\lambda'(x)e^{x^2} = -(2x-1)e^x \\Rightarrow \\lambda'(x) = -(2x-1)e^{x-x^2}. \\]\nUne primitive est \\(\\lambda(x) = e^{-x^2+x} = e^{-x^2} e^x\\). Donc une solution particulière est \\(y_p(x) = e^x\\). La solution générale est :\n\\[ y(x) = \\lambda e^{x^2} + e^x, \\quad \\lambda \\in \\mathbb{R}. \\]"
+    },
+    {
+    "id": 37,
+    "theme": "Logique et nombres",
+    "level": "cpge",
+    "problem": "136 est un multiple de 17 et 2 divise 167. Indiquer 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "Cette proposition est fausse, car 2 ne divise pas 167."
+    },
+    {
+    "id": 38,
+    "theme": "Logique et nombres",
+    "level": "cpge",
+    "problem": "136 est un multiple de 17 ou 2 divise 167. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Cette proposition est vraie, car 136 est un multiple de 17."
+    },
+    {
+    "id": 39,
+    "theme": "Logic",
+    "level": "cpge",
+    "problem": "Il existe x ∈ ℝ tel que x+1=0 et x+2=0 en même temps. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "Cette proposition est fausse, car x devrait être simultanément égal à -1 et à -2, ce qui est impossible."
+    },
+    {
+    "id": 40,
+    "theme": "Logic",
+    "level": "cpge",
+    "problem": "Il existe x ∈ ℝ tel que x+1=0, et il existe x ∈ ℝ tel que x+2=0. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Cette proposition est vraie car ∃x ∈ ℝ, x+1=0 est vraie (il suffit de prendre x=-1) et de la même façon ∃x ∈ ℝ, x+2=0 est vraie (il suffit de prendre x=-2)."
+    },
+    {
+    "id": 41,
+    "theme": "Logic",
+    "level": "cpge",
+    "problem": "Pour tout x ∈ ℝ, x+1 ≠ 0 ou x+2 ≠ 0. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Cette proposition est vraie, car il s'agit de la négation de la proposition 3, qui est fausse."
+    },
+    {
+    "id": 42,
+    "theme": "Linear equations",
+    "level": "cpge",
+    "problem": "Résoudre le système suivant :\n\\[\nx + y + 2z = 3\\\\\nx + 2y + z = 1\\\\\n2x + y + z = 0\n\\]\nIndiquer la solution sous forme (x, y, z).",
+    "answer": "(-1, 0, 2)",
+    "solution": "On utilise la méthode du pivot de Gauss :\n1) Soustraire L1 de L2 et 2*L1 de L3 pour simplifier le système :\n\\[\ny - z = -2\\\\\n-4z = -8\\] \n2) On en déduit z=2, y=0 et enfin x=-1.\nDonc la solution est (x, y, z) = (-1, 0, 2)."
+    },
+    {
+    "id": 43,
+    "theme": "Linear equations",
+    "level": "cpge",
+    "problem": "Résoudre le système suivant :\n\\[\nx + 2z = 1\\\\\n-y + z = 2\\\\\nx - 2y = 1\n\\]\nIndiquer la solution sous forme (x, y, z).",
+    "answer": "(-1, -1, 1)",
+    "solution": "On applique la méthode du pivot de Gauss :\n1) De L3 - L1 on obtient -4z=-4 => z=1\n2) Puis de L2, -y + z = 2 => -y + 1 = 2 => y=-1\n3) Enfin de L1, x + 2*1 = 1 => x=-1\nDonc la solution est (x, y, z) = (-1, -1, 1)."
+    },
+    {
+    "id": 44,
+    "theme": "Series",
+    "level": "cpge",
+    "problem": "Écrire la somme suivante avec le symbole somme et choisir la bonne réponse :\n\n2\\cdot 3 + 2\\cdot 4 + \\cdots + 2\\cdot 12\n\n \n- \\sum_{k=2}^{12} 2k\n \n- \\sum_{k=3}^{12} 2k\n \n- \\sum_{k=1}^{12} 2k\n \n- \\sum_{k=3}^{13} 2k",
+    "answer": "\\sum_{k=3}^{12} 2k",
+    "solution": "La somme commence à k=3 et se termine à k=12, chaque terme étant multiplié par 2. Donc la bonne notation est \\sum_{k=3}^{12} 2k."
+    },
+    {
+    "id": 45,
+    "theme": "Series",
+    "level": "cpge",
+    "problem": "Écrire la somme suivante avec le symbole somme et choisir la bonne réponse :\n\n1\\cdot 2 + 2\\cdot 4 + 3\\cdot 8 + \\cdots + 10\\cdot 1024\n\n \n- \\sum_{k=0}^{9} k 2^k\n \n- \\sum_{k=1}^{10} k 2^k\n \n- \\sum_{k=1}^{11} k 2^k\n \n- \\sum_{k=2}^{10} k 2^k",
+    "answer": "\\sum_{k=1}^{10} k 2^k",
+    "solution": "Chaque terme est de la forme k*2^k, k allant de 1 à 10. Donc la bonne notation est \\sum_{k=1}^{10} k 2^k."
+    },
+    {
+    "id": 46,
+    "theme": "Series",
+    "level": "cpge",
+    "problem": "Écrire la somme suivante avec le symbole somme et choisir la bonne réponse :\n\n2 - 4 + 6 - 8 + \\cdots + 50\n\n \n- \\sum_{k=1}^{25} (-1)^k 2k\n \n- \\sum_{k=1}^{25} (-1)^{k+1} 2k\n \n- \\sum_{k=1}^{50} (-1)^{k+1} k\n \n- \\sum_{k=1}^{25} (-1)^{k+1} k",
+    "answer": "\\sum_{k=1}^{25} (-1)^{k+1} 2k",
+    "solution": "Les termes alternent en signe et sont tous pairs (2k). Donc la bonne notation est \\sum_{k=1}^{25} (-1)^{k+1} 2k."
+    },
+    {
+    "id": 47,
+    "theme": "Series",
+    "level": "cpge",
+    "problem": "Écrire la somme suivante avec le symbole somme et choisir la bonne réponse :\n\n1 - 1/2 + 1/3 - 1/4 + \\cdots + 1/(2n-1) - 1/(2n)\n\n \n- \\sum_{k=1}^{n} (-1)^{k+1}/(2k-1)\n \n- \\sum_{k=1}^{2n} (-1)^k/k\n \n- \\sum_{k=1}^{2n} (-1)^{k+1}/k\n \n- \\sum_{k=1}^{n} (-1)^k/(2k)",
+    "answer": "\\sum_{k=1}^{2n} (-1)^{k+1}/k",
+    "solution": "La somme alterne les signes pour les termes 1/k de k=1 à 2n, donc la bonne notation est \\sum_{k=1}^{2n} (-1)^{k+1}/k."
+    },
+    {
+    "id": 48,
+    "theme": "Complex numbers",
+    "level": "cpge",
+    "problem": "Mettre sous forme algébrique le nombre complexe suivant et choisir la bonne réponse :\n\n$$z_5 = i (1 - 3i)^2$$\n\n\n- $$-6 - 8i$$\n\n- $$6 - 8i$$\n\n- $$-6 + 8i$$\n\n- $$6 + 8i$$",
+    "answer": "6 - 8i",
+    "solution": "Calculons $$(1 - 3i)^2 = 1 - 2 \\cdot 3i + (3i)^2 = 1 - 6i - 9 = -8 - 6i.$$ Ensuite, multiplions par $i$ : $$i(-8 - 6i) = -8i - 6i^2 = -8i + 6 = 6 - 8i.$$"
+    },
+    {
+    "id": 49,
+    "theme": "Complex numbers",
+    "level": "cpge",
+    "problem": "Résoudre l'équation complexe :\n\n$$\\exp(z) = 3\\sqrt{3} - 3i$$\n\nChoisir la bonne réponse :\n\n\n- $$z = \\ln(6) + i(-\\pi/6 + 2k\\pi), k \\in \\mathbb{Z}$$\n\n- $$z = \\ln(6) + i(\\pi/6 + 2k\\pi), k \\in \\mathbb{Z}$$\n\n- $$z = \\ln(6) - i(-\\pi/6 + 2k\\pi), k \\in \\mathbb{Z}$$\n\n- $$z = \\ln(3) + i(-\\pi/6 + 2k\\pi), k \\in \\mathbb{Z}$$",
+    "answer": "z = \\ln(6) + i(-\\pi/6 + 2k\\pi), k \\in \\mathbb{Z}",
+    "solution": "On pose $z = a + ib$, $a,b \\in \\mathbb{R}$. Alors $$\\exp(z) = \\exp(a) \\cdot \\exp(ib).$$ Mettons $3\\sqrt{3} - 3i$ sous forme trigonométrique : $$|3\\sqrt{3} - 3i| = \\sqrt{27+9} = 6$$ et argument $$\\theta = -\\pi/6.$$ Donc $$3\\sqrt{3} - 3i = 6 \\exp(-i\\pi/6).$$ Ainsi $$\\exp(a) = 6 \\Rightarrow a = \\ln(6)$$ et $$b = -\\pi/6 + 2k\\pi, k \\in \\mathbb{Z}.$$ Donc $$z = \\ln(6) + i(-\\pi/6 + 2k\\pi), k \\in \\mathbb{Z}.$$"
+    },
+    {
+    "id": 50,
+    "theme": "Complex numbers",
+    "level": "cpge",
+    "problem": "Résoudre l'équation complexe suivante :\n\n$$z + 2i = iz - 1$$",
+    "answer": "z = \\frac{1}{2} - \\frac{3}{2} i",
+    "solution": "On commence par regrouper les termes contenant $z$ d'un côté : $$z - iz = -1 - 2i$$\nFactorisation : $$z(1 - i) = -1 - 2i$$\nDivision par $(1 - i)$ : $$z = \\frac{-1 - 2i}{1 - i}$$\nMultiplication par le conjugué : $$z = \\frac{(-1 - 2i)(1 + i)}{(1 - i)(1 + i)}$$\n$$z = \\frac{-1 - 3i + 2}{2}$$\nSolution finale : $$z = \\frac{1}{2} - \\frac{3}{2} i$$"
+    }
+]

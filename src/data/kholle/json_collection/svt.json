@@ -1,0 +1,203 @@
+[
+  {
+    "id": 1,
+    "theme": "Genetics",
+    "level": "bac",
+    "problem": "La transcription est le processus qui permet de passer de l’ADN à l’ARN. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "La transcription est la première étape de l’expression du génome et est réalisée par l’ARN polymérase."
+  },
+  {
+    "id": 2,
+    "theme": "Genetics",
+    "level": "bac",
+    "problem": "Les brassages interchromosomiques et intrachromosomiques ont lieu lors de la division de mitose. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "Les brassages ont uniquement lieu lors des divisions de méiose et permettent la diversification du génome."
+  },
+  {
+    "id": 3,
+    "theme": "Genetics",
+    "level": "bac",
+    "problem": "Un échange contrôlé de portion d’ADN entre deux chromosomes homologues ayant lieu en prophase I de la méiose est :\n- Un brassage intrachromosomique\n- Un brassage interchromosomique",
+    "answer": "Un brassage intrachromosomique",
+    "solution": "Le brassage intrachromosomique correspond aux échanges d’ADN lors des crossing-over en prophase I. Le brassage interchromosomique se produit en anaphase I."
+  },
+  {
+    "id": 4,
+    "theme": "Genetics",
+    "level": "bac",
+    "problem": "L’ensemble des caractères visibles d’un individu est :\n- phénotype\n- génotype\n- génome\n- ADN",
+    "answer": "phénotype",
+    "solution": "Le phénotype désigne l’ensemble des caractères observables d’un individu, résultant de l’expression du génotype et de l’influence de l’environnement."
+  },
+  {
+    "id": 5,
+    "theme": "Metabolism",
+    "level": "bac",
+    "problem": "La glycogénogénèse est le processus de synthèse de glycogène à partir du glucose. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "La glycogénogénèse a lieu dans le foie et les muscles."
+  },
+  {
+    "id": 6,
+    "theme": "Botany",
+    "level": "bac",
+    "problem": "Les stomates sont des ouvertures présentes sur la tige d’une plante et permettant les échanges de gaz avec le milieu extérieur. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "Les stomates sont présents sur les feuilles de la plante mais permettent bien les échanges gazeux."
+  },
+  {
+    "id": 7,
+    "theme": "Geology",
+    "level": "bac",
+    "problem": "La technique de datation au rubidium/strontium est une technique de datation relative. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "La datation rubidium/strontium est une technique de datation absolue permettant d’estimer l’âge précis d’une roche."
+  },
+  {
+    "id": 8,
+    "theme": "Geology",
+    "level": "bac",
+    "problem": "Enveloppe rigide de la surface de la Terre comprenant la croûte et le manteau lithosphérique :\n- manteau\n- lithosphère\n- noyau",
+    "answer": "lithosphère",
+    "solution": "La lithosphère est l’enveloppe rigide englobant la croûte et la partie supérieure du manteau."
+  },
+  {
+    "id": 9,
+    "theme": "Geology",
+    "level": "bac",
+    "problem": "On reconnait la fin de la lithosphère lorsqu’on arrive à la fin du manteau. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "La limite inférieure de la lithosphère correspond à l’isotherme 1300 °C, pas à la fin du manteau."
+  },
+  {
+    "id": 10,
+    "theme": "Biochemistry",
+    "level": "bac",
+    "problem": "Toutes les protéines sont des enzymes. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "Toutes les enzymes sont des protéines, mais toutes les protéines ne sont pas des enzymes."
+  },
+  {
+    "id": 11,
+    "theme": "Biochemistry",
+    "level": "bac",
+    "problem": "Zone de l’enzyme qui fixe et reconnait le substrat et catalyse la réaction :\n\nA) Site catalytique\nB) Site actif\nC) Site de reconnaissance\nD) Site régulateur",
+    "answer": "Site actif",
+    "solution": "Le site actif est la zone de l’enzyme qui reconnaît le substrat et catalyse la réaction."
+  },
+  {
+    "id": 12,
+    "theme": "Physics",
+    "level": "bac",
+    "problem": "La vitesse de la lumière dans le vide est constante et indépendante du référentiel. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Selon la relativité restreinte, la vitesse de la lumière dans le vide est une constante universelle."
+  },
+  {
+    "id": 13,
+    "theme": "Physics",
+    "level": "bac",
+    "problem": "L’accélération due à la gravité g sur Terre est approximativement de 9,8 m/s². Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Cette valeur correspond à l’accélération gravitationnelle moyenne sur Terre."
+  },
+  {
+    "id": 14,
+    "theme": "Physics",
+    "level": "bac",
+    "problem": "La loi de Newton F = ma s’applique uniquement aux mouvements rectilignes. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "La deuxième loi de Newton est générale et s’applique à tous les mouvements, pas seulement rectilignes."
+  },
+  {
+    "id": 15,
+    "theme": "Mathematics",
+    "level": "bac",
+    "problem": "Pour tout x ∈ ℝ, x² ≥ 0. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Le carré de tout nombre réel est toujours positif ou nul."
+  },
+  {
+    "id": 16,
+    "theme": "Mathematics",
+    "level": "bac",
+    "problem": "La dérivée de sin(x) est cos(x). Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "C’est une règle de base de la dérivation des fonctions trigonométriques."
+  },
+  {
+    "id": 17,
+    "theme": "Mathematics",
+    "level": "bac",
+    "problem": "Le logarithme naturel ln(x) est défini pour x ≤ 0. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "La fonction ln(x) n’est définie que pour x > 0."
+  },
+  {
+    "id": 18,
+    "theme": "Chemistry",
+    "level": "bac",
+    "problem": "Le pH d’une solution acide est inférieur à 7. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Par définition, une solution acide a un pH compris entre 0 et 7."
+  },
+  {
+    "id": 19,
+    "theme": "Chemistry",
+    "level": "bac",
+    "problem": "L’eau est un solvant polaire. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "La molécule d’eau possède un moment dipolaire, ce qui en fait un solvant polaire."
+  },
+  {
+    "id": 20,
+    "theme": "Chemistry",
+    "level": "bac",
+    "problem": "L’oxydation est une réaction au cours de laquelle une espèce perd des électrons. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "L’oxydation correspond bien à la perte d’électrons."
+  },
+  {
+    "id": 21,
+    "theme": "Chemistry",
+    "level": "bac",
+    "problem": "La réaction HCl + NaOH → NaCl + H2O est une réaction d’acide-base. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Cette réaction est un exemple classique de neutralisation acide-base."
+  },
+  {
+    "id": 22,
+    "theme": "Biology",
+    "level": "bac",
+    "problem": "Les mitochondries sont les centrales énergétiques de la cellule. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Les mitochondries produisent l’ATP grâce à la respiration cellulaire."
+  },
+  {
+    "id": 23,
+    "theme": "Biology",
+    "level": "bac",
+    "problem": "Les ribosomes sont responsables de la synthèse des protéines. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "Les ribosomes traduisent l’ARNm en protéines."
+  },
+  {
+    "id": 24,
+    "theme": "Biology",
+    "level": "bac",
+    "problem": "La membrane plasmique est une barrière imperméable à toutes les molécules. Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "0",
+    "solution": "La membrane est semi-perméable et laisse passer certaines molécules via des transporteurs ou canaux."
+  },
+  {
+    "id": 25,
+    "theme": "Mathematics",
+    "level": "bac",
+    "problem": "Si f(x) = x³, alors f'(x) = 3x². Répondre 1 si c’est vrai, 0 sinon.",
+    "answer": "1",
+    "solution": "C’est la dérivée standard de la fonction puissance f(x) = x³."
+  }
+]
+
