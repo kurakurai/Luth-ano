@@ -1,5 +1,5 @@
 model:
-  model_name: "kurakurai/Luth-LFM2-1.2B-checkpoint-2712"
+  model_name: "kurakurai/Luth-LFM2-1.2B"
   dtype: "bfloat16"
   gpu_memory_utilization: 0.9
   max_model_length: 16384

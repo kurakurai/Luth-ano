@@ -1,5 +1,5 @@
 community|ifeval_fr|0|0
-community|gpqa_fr:diamond|0|0
+community|gpqa_fr|0|0
 community|mmlu_fr|0|0
 community|aime24_fr|0|0
 community|math_500_fr|0|0
@@ -9,3 +9,4 @@ community|musr_fr|0|0
 community|math_lvl5_fr|0|0
 community|boolq_fr|0|0
 community|bbh_fr|0|0
+community|kholle_fr|0|0

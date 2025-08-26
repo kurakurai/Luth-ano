@@ -25,7 +25,6 @@ env-train:
 	@echo "Installing build dependencies..."
 	@uv pip install setuptools wheel build --python $(TRAIN_VENV)/bin/python
 	@uv pip install torch==2.6.0 --python $(TRAIN_VENV)/bin/python
-	@echo "Installing base requirements..."
 	@uv pip install -r requirements-train.txt --python $(TRAIN_VENV)/bin/python
 	@uv pip install --no-build-isolation axolotl[deepspeed]>=0.12.0 --python $(TRAIN_VENV)/bin/python
 	@echo "Training environment ready."
@@ -39,8 +38,8 @@ env:
 	@echo "Setting up eval environment..."
 	@uv venv $(EVAL_VENV) --python $(PYTHON_VERSION) --no-project
 	@uv pip install -r requirements.txt --python $(EVAL_VENV)/bin/python
-	@VLLM_USE_PRECOMPILED=1 uv pip install git+https://github.com/paulpak58/vllm.git@lfm2_v2 --python $(EVAL_VENV)/bin/python
-	@uv pip install git+https://github.com/flashinfer-ai/flashinfer.git@v0.2.12 --no-deps --python $(EVAL_VENV)/bin/python
+	@VLLM_USE_PRECOMPILED=1 uv pip install vllm==0.10.1.1 --python $(EVAL_VENV)/bin/python
+	@uv pip install git+https://github.com/arcee-ai/mergekit.git --python $(EVAL_VENV)/bin/python
 	@echo "Evaluation environment ready."
 	
 # Run supervised fine-tuning

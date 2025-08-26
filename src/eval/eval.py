@@ -74,7 +74,6 @@ def main(args):
     
     if "LFM2" in model_yaml.get("model_name", ""):
         os.environ["VLLM_USE_V1"] = "1"
-        os.environ["VLLM_ATTENTION_BACKEND"] = "FLASHINFER"
     
     if not extras_yaml.get("enable_prefix_caching"):
         patch_prefix_caching()
