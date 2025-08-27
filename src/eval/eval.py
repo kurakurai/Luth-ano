@@ -46,11 +46,12 @@ def main(args):
     Main function to run the evaluation pipeline with vLLM backend.
     """
     # Ensure NLTK punkt tokenizer is available
-    try:
-        nltk.data.find("tokenizers/punkt")
-    except LookupError:
-        print("Downloading NLTK punkt tokenizer...")
-        nltk.download("punkt_tab")
+    for resource in ["punkt", "punkt_tab"]:
+        try:
+            nltk.data.find(f"tokenizers/{resource}")
+        except LookupError:
+            print(f"Downloading NLTK {resource} tokenizer...")
+            nltk.download(resource)
 
     # Loading configuration from YAML file
     with open(args.config, "r") as f:

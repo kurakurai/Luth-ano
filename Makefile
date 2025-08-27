@@ -25,7 +25,7 @@ env-train:
 	@echo "Installing build dependencies..."
 	@uv pip install setuptools wheel build --python $(TRAIN_VENV)/bin/python
 	@uv pip install torch==2.6.0 --python $(TRAIN_VENV)/bin/python
-	@uv pip install -r requirements-train.txt --python $(TRAIN_VENV)/bin/python
+	@uv pip install --no-build-isolation -r requirements-train.txt --python $(TRAIN_VENV)/bin/python
 	@uv pip install --no-build-isolation axolotl[deepspeed]>=0.12.0 --python $(TRAIN_VENV)/bin/python
 	@echo "Training environment ready."
 
