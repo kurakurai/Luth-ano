@@ -81,7 +81,6 @@ math_500_fr_task = LightevalTaskConfig(
 )
 
 
-
 # kholle-fr task
 kholle_fr_task = LightevalTaskConfig(
     name="kholle_fr",
@@ -90,7 +89,7 @@ kholle_fr_task = LightevalTaskConfig(
     hf_repo="kurakurai/kholle",
     hf_subset="default",
     metric=[custom_metric.kholle_pass_at_1_1n],
-    hf_avail_splits=["combined","cpge","bac"],
+    hf_avail_splits=["combined", "cpge", "bac"],
     evaluation_splits=["combined"],
     few_shots_split="train",
     few_shots_select="random",
