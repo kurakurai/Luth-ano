@@ -1,9 +1,8 @@
 model:
-  model_name: "kurakurai/Luth-LFM2-350M"
+  model_name: "kurakurai/Luth-0.6B-Instruct"
   dtype: "bfloat16"
   gpu_memory_utilization: 0.9
   max_model_length: 16384
-  # data_parallel_size: 2
   tensor_parallel_size: 2
   # trust_remote_code: true # LFM2-VL
   
@@ -20,7 +19,7 @@ extras:
   use_chat_template: true
   system_prompt: "You are a helpful assistant."
   output_dir: "results/"
-  save_details: true
+  save_details: false
   push_to_hub: false 
 
 tasks:

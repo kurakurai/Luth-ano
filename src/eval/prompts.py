@@ -300,6 +300,7 @@ Résous le problème de mathématiques suivant de manière efficace et claire. L
         choices=[line["solution"]],
     )
 
+
 def prompt_kholle_fr(line, task_name: str = None):
     MATH_QUERY_TEMPLATE = """
     Tu résous des exercices de maths/physique/svt.  
