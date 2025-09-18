@@ -2,7 +2,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-from patch_lighteval.patch import patch_reasoning, patch_prefix_caching
+from patch_lighteval.patch import patch_reasoning, patch_prefix_caching, patch_vllm_api
 from lighteval.models.vllm.vllm_model import VLLMModelConfig
 
 patch_reasoning()
@@ -76,11 +76,26 @@ def display_avg_metrics(results, num_runs):
                 if not key.endswith("_stderr"):
                     all_metrics.add(key)
 
+    # Create sorted task list - group _average tasks right after their base tasks
     sorted_tasks = []
     if results:
-        for task_name in results[0].keys():
-            if task_name != "all" and task_name in filtered_task_metrics:
-                sorted_tasks.append((task_name, filtered_task_metrics[task_name]))
+        all_tasks = [
+            (task_name, filtered_task_metrics[task_name])
+            for task_name in results[0].keys()
+            if task_name != "all" and task_name in filtered_task_metrics
+        ]
+
+        # Sort all tasks by name, but use a custom key to put _average tasks after their base
+        def sort_key(task_tuple):
+            task_name = task_tuple[0]
+            if task_name.endswith("_average"):
+                # For _average tasks, use the base name for sorting
+                base_name = task_name.replace("_average", "")
+                return (base_name, 1)  # 1 ensures it comes after the base task
+            else:
+                return (task_name, 0)  # 0 ensures it comes before _average
+
+        sorted_tasks = sorted(all_tasks, key=sort_key)
 
     print(f"\n|{'Task':<54}|{'Metric':<30}|{'Value':<8}|")
     print(f"|{'-'*54}|{'-'*30}|{'-'*8}|")
@@ -130,9 +145,13 @@ def main(args):
 
     if "LFM2" in model_yaml.get("model_name", ""):
         os.environ["VLLM_USE_V1"] = "1"
+        os.environ["VLLM_ATTENTION_BACKEND"] = "FLASHINFER"
 
     if not extras_yaml.get("enable_prefix_caching"):
         patch_prefix_caching()
+
+    # Always patch vLLM API for compatibility
+    patch_vllm_api()
 
     config_kwargs = dict(model_yaml)
     config_kwargs["generation_parameters"] = GenerationParameters(

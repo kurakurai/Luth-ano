@@ -1,8 +1,9 @@
 model:
-  model_name: "kurakurai/Luth-0.6B-Instruct"
+  model_name: "google/gemma-3-270m-it"
   dtype: "bfloat16"
   gpu_memory_utilization: 0.9
   max_model_length: 16384
+  # data_parallel_size: 2
   tensor_parallel_size: 2
   # trust_remote_code: true # LFM2-VL
   
@@ -12,7 +13,7 @@ model_parameters:
   max_new_tokens: 8192
 
 extras:
-  num_runs: 1 # Number of runs (result will be averaged)
+  num_runs: 3 # Number of runs (result will be averaged)
   enable_prefix_caching: false # Set to false for LFM2 models
   enable_thinking: false
   answer_token: "</think>"  

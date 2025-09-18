@@ -1,5 +1,4 @@
 from importlib import import_module
-import importlib
 import inspect
 import textwrap
 import sys
@@ -217,11 +216,11 @@ def patch_reasoning():
         raise RuntimeError(f"Failed to patch enable_thinking: {str(e)}")
 
 
-
-
 from typing import Coroutine, Optional
 from lighteval.models.vllm.vllm_model import VLLMModelConfig
 from vllm import LLM
+
+
 def _create_auto_model(self, config: VLLMModelConfig) -> Optional[LLM]:
     """
     Creates an instance of the pretrained HF model.
@@ -243,7 +242,8 @@ def _create_auto_model(self, config: VLLMModelConfig) -> Optional[LLM]:
     self.model_args = {
         "model": config.model_name,
         "gpu_memory_utilization": config.gpu_memory_utilization,
-        "revision": config.revision + (f"/{config.subfolder}" if config.subfolder is not None else ""),
+        "revision": config.revision
+        + (f"/{config.subfolder}" if config.subfolder is not None else ""),
         "dtype": config.dtype,
         "trust_remote_code": config.trust_remote_code,
         "tensor_parallel_size": config.tensor_parallel_size,
@@ -253,8 +253,8 @@ def _create_auto_model(self, config: VLLMModelConfig) -> Optional[LLM]:
         "seed": int(config.seed),
         "max_num_seqs": int(config.max_num_seqs),
         "max_num_batched_tokens": int(config.max_num_batched_tokens),
-        "enable_prefix_caching": False        
-        }
+        "enable_prefix_caching": False,
+    }
 
     if config.quantization is not None:
         self.model_args["quantization"] = config.quantization
@@ -276,21 +276,67 @@ def _create_auto_model(self, config: VLLMModelConfig) -> Optional[LLM]:
 
     return model
 
+
+def patch_vllm_api():
+    """Patch vLLM API compatibility for version 0.10.2+
+
+    This patch corrects the API migration from prompt_token_ids to TokensPrompt.
+    The key fix is ensuring inputs (list of token lists) is properly wrapped
+    as a single TokensPrompt, not wrapped individually per token list.
+    """
+    try:
+        from lighteval.models.vllm.vllm_model import VLLMModel
+        from vllm.inputs import TokensPrompt
+
+        # Get the original _generate method
+        original_generate = getattr(VLLMModel, "_generate")
+        function = inspect.getsource(original_generate)
+        function = textwrap.dedent(function)
+
+        # Replace the old API calls with new API - be more precise with the replacements
+        # First replace the main generate call
+        function = function.replace(
+            "prompt_token_ids=inputs,",
+            "prompts=[TokensPrompt(prompt_token_ids=token_ids) for token_ids in inputs],",
+        )
+
+        # Then replace the ray remote function call
+        function = function.replace(
+            "return llm.generate(prompt_token_ids=requests, sampling_params=sampling_params)",
+            "return llm.generate(prompts=[TokensPrompt(prompt_token_ids=token_ids) for token_ids in requests], sampling_params=sampling_params)",
+        )
+
+        # Execute the patched function with TokensPrompt in the namespace
+        local_ns = {}
+        exec_globals = original_generate.__globals__.copy()
+        exec_globals["TokensPrompt"] = TokensPrompt
+        exec(function, exec_globals, local_ns)
+        VLLMModel._generate = local_ns["_generate"]
+        sys.modules["lighteval.models.vllm.vllm_model"].VLLMModel._generate = (
+            VLLMModel._generate
+        )
+
+        print("Lighteval vLLM API compatibility successfully patched.")
+
+    except Exception as e:
+        raise RuntimeError(f"Failed to patch vLLM API: {str(e)}")
+
+
 def patch_prefix_caching():
     try:
         from lighteval.models.vllm.vllm_model import VLLMModel
-        
+
         function = inspect.getsource(_create_auto_model)
         function = textwrap.dedent(function)
         original_function = getattr(VLLMModel, "_create_auto_model")
         local_ns = {}
         exec(function, original_function.__globals__, local_ns)
         VLLMModel._create_auto_model = local_ns["_create_auto_model"]
-        sys.modules[
-            "lighteval.models.vllm.vllm_model"
-        ].VLLMModel._create_auto_model = VLLMModel._create_auto_model
+        sys.modules["lighteval.models.vllm.vllm_model"].VLLMModel._create_auto_model = (
+            VLLMModel._create_auto_model
+        )
 
         print("Lighteval prefix caching successfully patched.")
-    
+
     except Exception as e:
         raise RuntimeError(f"Failed to patch prefix caching: {str(e)}")

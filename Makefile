@@ -38,7 +38,7 @@ env:
 	@echo "Setting up eval environment..."
 	@uv venv $(EVAL_VENV) --python $(PYTHON_VERSION) --no-project
 	@uv pip install -r requirements.txt --python $(EVAL_VENV)/bin/python
-	@VLLM_USE_PRECOMPILED=1 uv pip install vllm==0.10.1.1 --python $(EVAL_VENV)/bin/python
+	@uv pip install vllm==0.10.2 --python $(EVAL_VENV)/bin/python
 	@uv pip install git+https://github.com/arcee-ai/mergekit.git --python $(EVAL_VENV)/bin/python
 	@echo "Evaluation environment ready."
 	
