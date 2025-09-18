@@ -57,45 +57,28 @@ def display_avg_metrics(results, num_runs):
             if task_name != "all":
                 task_metrics[task_name].append(task_data)
 
-    filtered_task_metrics = {}
-    for task_name, task_runs in task_metrics.items():
-        if ":" in task_name and not task_name.endswith("_average"):
-            parts = task_name.split(":")
-            if len(parts) > 2:
-                continue
-        filtered_task_metrics[task_name] = task_runs
-
-    if not filtered_task_metrics:
-        print("No valid tasks found after filtering.")
+    if not task_metrics:
+        print("No valid tasks found.")
         return
 
     all_metrics = set()
-    for task_runs in filtered_task_metrics.values():
+    for task_runs in task_metrics.values():
         if task_runs:
             for key in task_runs[0].keys():
                 if not key.endswith("_stderr"):
                     all_metrics.add(key)
 
-    # Create sorted task list - group _average tasks right after their base tasks
+    # Create sorted task list
     sorted_tasks = []
     if results:
         all_tasks = [
-            (task_name, filtered_task_metrics[task_name])
+            (task_name, task_metrics[task_name])
             for task_name in results[0].keys()
-            if task_name != "all" and task_name in filtered_task_metrics
+            if task_name != "all" and task_name in task_metrics
         ]
 
-        # Sort all tasks by name, but use a custom key to put _average tasks after their base
-        def sort_key(task_tuple):
-            task_name = task_tuple[0]
-            if task_name.endswith("_average"):
-                # For _average tasks, use the base name for sorting
-                base_name = task_name.replace("_average", "")
-                return (base_name, 1)  # 1 ensures it comes after the base task
-            else:
-                return (task_name, 0)  # 0 ensures it comes before _average
-
-        sorted_tasks = sorted(all_tasks, key=sort_key)
+        # Sort all tasks alphabetically
+        sorted_tasks = sorted(all_tasks, key=lambda x: x[0])
 
     print(f"\n|{'Task':<54}|{'Metric':<30}|{'Value':<8}|")
     print(f"|{'-'*54}|{'-'*30}|{'-'*8}|")

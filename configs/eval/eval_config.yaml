@@ -1,10 +1,10 @@
 model:
-  model_name: "google/gemma-3-270m-it"
+  model_name: "kurakurai/Luth-LFM2-700M"
   dtype: "bfloat16"
   gpu_memory_utilization: 0.9
   max_model_length: 16384
   # data_parallel_size: 2
-  tensor_parallel_size: 2
+  tensor_parallel_size: 4
   # trust_remote_code: true # LFM2-VL
   
 
