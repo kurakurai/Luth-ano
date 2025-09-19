@@ -80,8 +80,8 @@ def display_avg_metrics(results, num_runs):
         # Sort all tasks alphabetically
         sorted_tasks = sorted(all_tasks, key=lambda x: x[0])
 
-    print(f"\n|{'Task':<54}|{'Metric':<30}|{'Value':<8}|")
-    print(f"|{'-'*54}|{'-'*30}|{'-'*8}|")
+    print(f"\n|{'Task':<54}|{'Metric':<30}|{'Mean':<8}|{'Std':<8}|")
+    print(f"|{'-'*54}|{'-'*30}|{'-'*8}|{'-'*8}|")
 
     for task_name, task_runs in sorted_tasks:
         if not task_runs:
@@ -96,8 +96,9 @@ def display_avg_metrics(results, num_runs):
             values = [run_data[key] for run_data in task_runs if key in run_data]
             if values:
                 mean = np.mean(values)
+                std = np.std(values) if len(values) > 1 else 0.0
                 task_display = display_task if i == 0 else ""
-                print(f"|{task_display:<54}|{key:<30}|{mean:<8.4f}|")
+                print(f"|{task_display:<54}|{key:<30}|{mean:<8.4f}|{std:<8.4f}|")
 
 
 def main(args):
@@ -150,21 +151,22 @@ def main(args):
     )
 
     tasks = get_tasks(tasks_yaml)
-    evaluation_tracker = EvaluationTracker(
-        output_dir=extras_yaml.get("output_dir", "results/"),
-        save_details=extras_yaml.get("save_details", True),
-        push_to_hub=extras_yaml.get("push_to_hub", False),
-    )
 
     all_run_results = []
     num_runs = extras_yaml.get("num_runs", 1)
 
     for run_idx in range(num_runs):
         print(f"\n🚀 Starting evaluation run {run_idx + 1}/{num_runs}")
+        # Create a new evaluation tracker for each run
+        run_evaluation_tracker = EvaluationTracker(
+            output_dir=extras_yaml.get("output_dir", "results/"),
+            save_details=extras_yaml.get("save_details", True),
+            push_to_hub=extras_yaml.get("push_to_hub", False),
+        )
         pipeline = Pipeline(
             tasks=tasks,
             pipeline_parameters=pipeline_params,
-            evaluation_tracker=evaluation_tracker,
+            evaluation_tracker=run_evaluation_tracker,
             model_config=model_config,
             enable_thinking=extras_yaml.get("enable_thinking", False),
         )
@@ -176,6 +178,7 @@ def main(args):
         all_run_results.append(run_results)
         print(f"✅ Completed run {run_idx + 1}/{num_runs}")
 
+    # Use the last pipeline for saving results
     pipeline.save_and_push_results()
     display_avg_metrics(all_run_results, num_runs)
 

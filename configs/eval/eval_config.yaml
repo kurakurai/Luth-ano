@@ -1,5 +1,5 @@
 model:
-  model_name: "kurakurai/Luth-LFM2-700M"
+  model_name: "LiquidAI/LFM2-700M"
   dtype: "bfloat16"
   gpu_memory_utilization: 0.9
   max_model_length: 16384
