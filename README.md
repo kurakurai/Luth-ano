@@ -99,3 +99,15 @@ mergekit-yaml configs/mergekit/merge_linear.yaml ./merged-output --cuda
 We used:
 - French bench: `temperature=0.0` and `system_prompt="Vous êtes un assistant utile."`.
 - English bench: `temperature=0.0` and `system_prompt="You are a helpful assistant."`.
+
+## Citation
+
+We are currently working on a paper!
+```bibtex
+@misc{luth2025kurakurai,
+  title   = {Luth},
+  author  = {Maxence Lasbordes, Sinoué Gad},
+  year    = {2025},
+  howpublished = {\url{https://github.com/kurakurai/Luth}},
+}
+```
