@@ -46,9 +46,9 @@ def display_avg_metrics(results, num_runs):
 
     print(f"\n{'='*80}")
     if num_runs == 1:
-        print("📊 EVALUATION RESULTS")
+        print("EVALUATION RESULTS")
     else:
-        print(f"📊 AVERAGE RESULTS ACROSS {num_runs} RUNS")
+        print(f"AVERAGE RESULTS ACROSS {num_runs} RUNS")
     print(f"{'='*80}")
 
     task_metrics = defaultdict(list)
@@ -156,7 +156,7 @@ def main(args):
     num_runs = extras_yaml.get("num_runs", 1)
 
     for run_idx in range(num_runs):
-        print(f"\n🚀 Starting evaluation run {run_idx + 1}/{num_runs}")
+        print(f"\nStarting evaluation run {run_idx + 1}/{num_runs}")
         # Create a new evaluation tracker for each run
         run_evaluation_tracker = EvaluationTracker(
             output_dir=extras_yaml.get("output_dir", "results/"),
@@ -176,7 +176,7 @@ def main(args):
             pipeline.evaluation_tracker.metrics_logger.metric_aggregated.copy()
         )
         all_run_results.append(run_results)
-        print(f"✅ Completed run {run_idx + 1}/{num_runs}")
+        print(f"Completed run {run_idx + 1}/{num_runs}")
 
     # Use the last pipeline for saving results
     pipeline.save_and_push_results()

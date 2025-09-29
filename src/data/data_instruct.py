@@ -156,25 +156,20 @@ def generation_pipeline(
 
 
 def main(args):
-    # Load dataset
     dataset = load_dataset(args.data_repo, split="train")
 
-    # Generate samples
     client = get_client(args.base_url, args.api_key)
 
-    # Translate input prompts in French
     translated_prompts = translation_pipeline(
         dataset, client, args.model_name, args.num_workers
     )
-    # Generate answers with the translated prompts in French
+
     generated = generation_pipeline(
         translated_prompts, client, args.model_name, args.num_workers
     )
-
-    # Ensure HF repo exists
     create_repo(repo_id=args.hf_repo, repo_type="dataset", exist_ok=True)
 
-    # Push to Hub
+
     hf_ds = HFDataset.from_list(generated)
     hf_ds.push_to_hub(repo_id=args.hf_repo, private=True)
 
