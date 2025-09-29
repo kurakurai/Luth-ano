@@ -1,10 +1,10 @@
 from huggingface_hub import create_repo, snapshot_download, upload_folder
 
 # Existing HF repo
-source_repo_id = "MaxLSB/Mistral-Small-24B-Instruct-lora-adapter-checkpoint-3648"
+source_repo_id = ""
 
 # New private HF repo
-new_repo_id = "lightonai/Mistral-Small-24B-Instruct-lora-adapter-French"
+new_repo_id = ""
 
 # Create the new private repo if it doesn't exist
 create_repo(repo_id=new_repo_id, repo_type="model", private=True, exist_ok=True)
