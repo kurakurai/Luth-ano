@@ -40,10 +40,10 @@ for fichier in reponses:
                 try:
                     data_list = json.loads(result_data)
                     if not isinstance(data_list, list):
-                        print(f"⚠️ 'result' parsé n'est pas une liste dans : {fichier}")
+                        print(f"'result' parsé n'est pas une liste dans : {fichier}")
                         continue
                 except json.JSONDecodeError as e:
-                    print(f"⚠️ Tentative de correction des échappements dans {fichier}")
+                    print(f"Tentative de correction des échappements dans {fichier}")
                     try:
 
                         corrected_data = result_data.replace('\\\\', '\\').replace('\\"', '"')
@@ -66,21 +66,21 @@ for fichier in reponses:
                         
                         data_list = json.loads(corrected_data)
                         if not isinstance(data_list, list):
-                            print(f"⚠️ 'result' parsé n'est pas une liste dans : {fichier}")
+                            print(f"'result' parsé n'est pas une liste dans : {fichier}")
                             continue
-                        print(f"✅ Correction réussie pour {fichier}")
+                        print(f"Correction réussie pour {fichier}")
                     except json.JSONDecodeError as e2:
-                        print(f"⚠️ Impossible de parser même après correction dans {fichier} : {e2}")
+                        print(f"Impossible de parser même après correction dans {fichier} : {e2}")
         
                         try:
                             import ast
                             data_list = ast.literal_eval(result_data)
                             if not isinstance(data_list, list):
-                                print(f"⚠️ 'result' parsé avec ast n'est pas une liste dans : {fichier}")
+                                print(f"'result' parsé avec ast n'est pas une liste dans : {fichier}")
                                 continue
-                            print(f"✅ Parsing avec ast réussi pour {fichier}")
+                            print(f"Parsing avec ast réussi pour {fichier}")
                         except Exception as e3:
-                            print(f"⚠️ Tentative d'extraction manuelle pour {fichier}")
+                            print(f"Tentative d'extraction manuelle pour {fichier}")
                             try:
 
                                 patterns = [
@@ -121,19 +121,19 @@ for fichier in reponses:
                                     simple_pattern = r'\{[^}]*"question"[^}]*\}'
                                     simple_matches = re.findall(simple_pattern, result_data)
                                     if simple_matches:
-                                        print(f"⚠️ Trouvé {len(simple_matches)} objets possibles, mais structure complexe")
-                                        print(f"⚠️ Contenu des premiers caractères: {result_data[:200]}...")
+                                        print(f"Trouvé {len(simple_matches)} objets possibles, mais structure complexe")
+                                        print(f"Contenu des premiers caractères: {result_data[:200]}...")
                                     continue
                                     
                             except Exception as e4:
-                                print(f"⚠️ Échec complet du parsing pour {fichier} : {e4}")
-                                print(f"⚠️ Contenu des premiers caractères: {result_data[:200]}...")
+                                print(f"Échec complet du parsing pour {fichier} : {e4}")
+                                print(f"Contenu des premiers caractères: {result_data[:200]}...")
                                 continue
 
             elif isinstance(result_data, list):
                 data_list = result_data
             else:
-                print(f"⚠️ 'result' n'est ni une string ni une liste dans : {fichier}")
+                print(f"'result' n'est ni une string ni une liste dans : {fichier}")
                 continue
 
 
@@ -142,7 +142,7 @@ for fichier in reponses:
             data_list = data
 
         else:
-            print(f"⚠️ Format inattendu dans : {fichier}")
+            print(f"Format inattendu dans : {fichier}")
             continue
 
 
