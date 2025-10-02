@@ -177,7 +177,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--hf_repo",
         type=str,
-        default="kurakurai/openhermes-fr-filtered",
+        default="/openhermes-fr-filtered",
         help="Your Hugging Face repository name to push the created dataset.",
     )
     args = parser.parse_args()

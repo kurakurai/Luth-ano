@@ -1,5 +1,5 @@
 models:
-  - model: kurakurai/Luth-LFM2-700M-checkpoint-4065
+  - model: 
     parameters:
       weight: 0.5
   - model: LiquidAI/LFM2-700M

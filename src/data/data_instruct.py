@@ -207,7 +207,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--hf_repo",
         type=str,
-        default="kurakurai/tulu-3-persona-instruct-fr",
+        default="/tulu-3-persona-instruct-fr",
         help="Your Hugging Face repository name to push the created dataset.",
     )
     args = parser.parse_args()

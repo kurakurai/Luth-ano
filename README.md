@@ -1,7 +1,7 @@
 # Luth: Efficient French Specialization for Small Language Models
 
 <div align="center">
-  <img src="./media/logo_kurakura.png" width="100%" alt="Kurakura AI Logo" />
+  <img src="" width="100%" alt="" />
 </div>
 
 ## Introduction

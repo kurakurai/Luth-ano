@@ -54,7 +54,7 @@ def main():
 
     final_dataset = Dataset.from_list(aime_fr)
     final_dataset.save_to_disk("aime_2024_fr")
-    final_dataset.push_to_hub("kurakurai/aime_2024_fr")
+    final_dataset.push_to_hub("/aime_2024_fr")
 
 if __name__=="__main__":
     main()

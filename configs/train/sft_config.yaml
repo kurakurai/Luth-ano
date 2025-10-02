@@ -32,30 +32,30 @@ micro_batch_size: 10
 # eval_batch_size: 4
 
 use_wandb: true
-wandb_project: "Kurakura AI"
+wandb_project: ""
 wandb_name: luth-lfm2-1.2B
 
 chat_template: "tokenizer_default"
 datasets:
-  - path: "kurakurai/luth-sft"
+  - path: ""
     type: "chat_template"
     split: "luth_scholar"
-  - path: "kurakurai/luth-sft"
+  - path: ""
     type: "chat_template"
     split: "luth_smoltalk2"
-  - path: "kurakurai/luth-sft"
+  - path: ""
     type: "chat_template"
     split: "luth_croissantllm"
-  - path: "kurakurai/luth-sft"
+  - path: "/luth-sft"
     type: "chat_template"
     split: "luth_aya_dataset"
-  - path: "kurakurai/luth-sft"
+  - path: "/luth-sft"
     type: "chat_template"
     split: "luth_tulu3_persona_math"
-  - path: "kurakurai/luth-sft"
+  - path: "/luth-sft"
     type: "chat_template"
     split: "luth_openhermes"
-  - path: "kurakurai/luth-sft"
+  - path: "/luth-sft"
     type: "chat_template"
     split: "luth_tulu3_persona_instruct"
 

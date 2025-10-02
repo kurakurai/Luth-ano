@@ -131,7 +131,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_repo",
         type=str,
-        default="kurakurai/tulu-3-persona-instruct-fr",
+        default="/tulu-3-persona-instruct-fr",
     )
     parser.add_argument(
         "--num_workers", type=int, default=128, help="Number of workers for generation."
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--hf_repo",
         type=str,
-        default="kurakurai/tulu-3-persona-instruct-fr-cleaned",
+        default="/tulu-3-persona-instruct-fr-cleaned",
         help="Your Hugging Face repository name to push the created dataset.",
     )
     args = parser.parse_args()
